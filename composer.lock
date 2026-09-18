@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "818a7bb995fe03215cdb142382f2ced3",
+    "content-hash": "34418d30afeb2ac568d46d94b2d19e6b",
     "packages": [
         {
             "name": "limegreentangerine/class_kit",
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:limegreentangerine/class_kit.git",
-                "reference": "6661ccdfc064824d8140e469fa0d4ec7c50dc9f4"
+                "url": "https://github.com/limegreentangerine/ClassKit.git",
+                "reference": "ed1fb3b8029d2070510640f219f21c0e7ee2881d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/limegreentangerine/class_kit/zipball/6661ccdfc064824d8140e469fa0d4ec7c50dc9f4",
-                "reference": "6661ccdfc064824d8140e469fa0d4ec7c50dc9f4",
+                "url": "https://api.github.com/repos/limegreentangerine/ClassKit/zipball/ed1fb3b8029d2070510640f219f21c0e7ee2881d",
+                "reference": "ed1fb3b8029d2070510640f219f21c0e7ee2881d",
                 "shasum": ""
             },
             "require-dev": {
@@ -32,44 +32,9 @@
                     "ClassKit\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "ClassKit\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "test-coverage": [
-                    "phpunit --coverage-text"
-                ],
-                "format:php": [
-                    "php-cs-fixer fix"
-                ],
-                "format:php:check": [
-                    "php-cs-fixer check --diff"
-                ],
-                "format:js": [
-                    "npx prettier --write ."
-                ],
-                "format:js:check": [
-                    "npx prettier --check ."
-                ],
-                "format": [
-                    "@format:php",
-                    "@format:js"
-                ],
-                "format:check": [
-                    "@format:php:check",
-                    "@format:js:check"
-                ],
-                "post-install-cmd": [
-                    "npm install"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "proprietary"
+                "MIT"
             ],
             "authors": [
                 {
@@ -83,10 +48,10 @@
             ],
             "description": "Collection of helper classes for LGT packages.",
             "support": {
-                "source": "https://github.com/limegreentangerine/class_kit/tree/1.0.0",
-                "issues": "https://github.com/limegreentangerine/class_kit/issues"
+                "issues": "https://github.com/limegreentangerine/ClassKit/issues",
+                "source": "https://github.com/limegreentangerine/ClassKit/tree/1.0.0"
             },
-            "time": "2026-09-17T13:55:00+00:00"
+            "time": "2026-09-18T08:47:28+00:00"
         }
     ],
     "packages-dev": [
@@ -5986,16 +5951,16 @@
         },
         {
             "name": "mlocati/ip-lib",
-            "version": "1.22.0",
+            "version": "1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mlocati/ip-lib.git",
-                "reference": "4e40ffd3bf9989db19403d89c4d8be44b87b8a91"
+                "reference": "f096c0e9ec8bd4691ee45394cfb77c97c6bba272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/4e40ffd3bf9989db19403d89c4d8be44b87b8a91",
-                "reference": "4e40ffd3bf9989db19403d89c4d8be44b87b8a91",
+                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/f096c0e9ec8bd4691ee45394cfb77c97c6bba272",
+                "reference": "f096c0e9ec8bd4691ee45394cfb77c97c6bba272",
                 "shasum": ""
             },
             "require": {
@@ -6041,7 +6006,7 @@
             ],
             "support": {
                 "issues": "https://github.com/mlocati/ip-lib/issues",
-                "source": "https://github.com/mlocati/ip-lib/tree/1.22.0"
+                "source": "https://github.com/mlocati/ip-lib/tree/1.22.1"
             },
             "funding": [
                 {
@@ -6053,7 +6018,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-10-15T12:35:09+00:00"
+            "time": "2026-09-17T09:24:44+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -14396,16 +14361,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.28.0",
+            "version": "v3.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "597c12ed286fb9d1701a36684ce6e0cbe28ebc8b"
+                "reference": "45a3c6e9224c3377a39c7b150bb29d5d97d2c75d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/597c12ed286fb9d1701a36684ce6e0cbe28ebc8b",
-                "reference": "597c12ed286fb9d1701a36684ce6e0cbe28ebc8b",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/45a3c6e9224c3377a39c7b150bb29d5d97d2c75d",
+                "reference": "45a3c6e9224c3377a39c7b150bb29d5d97d2c75d",
                 "shasum": ""
             },
             "require": {
@@ -14460,7 +14425,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.28.0"
+                "source": "https://github.com/twigphp/Twig/tree/v3.29.0"
             },
             "funding": [
                 {
@@ -14472,7 +14437,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-03T20:44:34+00:00"
+            "time": "2026-09-18T09:10:14+00:00"
         },
         {
             "name": "voku/portable-ascii",

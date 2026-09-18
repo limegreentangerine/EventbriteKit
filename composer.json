@@ -1,20 +1,25 @@
 {
-	"name": "limegreentangerine/composer_package",
-	"description": "composer_description",
+	"name": "limegreentangerine/eventbrite",
+	"description": "Eventbrite package",
 	"type": "concrete5-package",
 	"license": "proprietary",
 	"minimum-stability": "stable",
 	"autoload": {
 		"psr-4": {
-			"ComposerPackage\\": "src/"
+			"Eventbrite\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"ComposerPackage\\Tests\\": "tests/"
+			"Eventbrite\\Tests\\": "tests/"
 		}
 	},
-	"authors": [],
+	"authors": [
+		{
+			"name": "Dave Hendy",
+			"email": "david@limegreentangerine.co.uk"
+		}
+	],
 	"require-dev": {
 		"php": "^8.4",
 		"phpunit/phpunit": "^11",
@@ -45,12 +50,6 @@
 			"npm install"
 		]
 	},
-	"repositories": [
-		{
-			"type": "composer",
-			"url": "https://packages.limegreentangerine.net"
-		}
-	],
 	"require": {
 		"limegreentangerine/class_kit": "^1.0"
 	}
