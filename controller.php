@@ -2,10 +2,16 @@
 
 namespace Concrete\Package\Eventbrite;
 
-use Concrete\Core\Package\Package;
+use Concrete\Core\Entity\Package;
+use ClassKit\Package\Traits\PageTrait;
+use ClassKit\Package\PackageController;
+use ClassKit\Package\Traits\BlockTrait;
 
-class Controller extends Package
+class Controller extends PackageController
 {
+    use PageTrait;
+    use BlockTrait;
+
     /**
      * The packages handle.
      * Note that this must be unique in the
@@ -20,7 +26,7 @@ class Controller extends Package
      *
      * @var string
      */
-    protected $pkgVersion = '0.0.0';
+    protected $pkgVersion = '0.0.2';
 
     /**
      * The minimum Concrete version compatible with the package.
@@ -71,7 +77,8 @@ class Controller extends Package
      * ]
      */
     protected $packageDependencies = [
-        'class_kit' => true
+        'class_kit' => true,
+        'lgt_toolkit' => true,
     ];
 
     /**
@@ -93,15 +100,35 @@ class Controller extends Package
      *
      * @var array
      */
-    protected $tasks = [];
+    protected $tasks = [
+        'get_events' => \Eventbrite\Command\Task\Controller\GetEventsController::class,
+    ];
 
     public function getPackageName()
     {
-        return t('eventbrite');
+        return t('Eventbrite');
     }
 
     public function getPackageDescription()
     {
         return t('Eventbrite package');
     }
+
+    public function installOrUpgrade(Package $pkg)
+    {
+        // Add blocks
+        $this->autoInstallBlocks($pkg);
+
+        // dashboard pages
+        $this->addSinglePage('/dashboard/eventbrite', $pkg, t('Eventbrite'));
+        $this->addSinglePage('/dashboard/eventbrite/settings', $pkg, t('Settings'));
+        $this->addSinglePage('/dashboard/eventbrite/events', $pkg, t('Events'));
+
+        // add tasks
+        $this->installContentFile('tasks.xml');
+    }
+
+    public function registerRoutes(): void {}
+
+    public function registerEvents(): void {}
 }

@@ -2,6 +2,10 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in([
+        __DIR__ . '/blocks',
+        __DIR__ . '/controllers',
+        __DIR__ . '/elements',
+        __DIR__ . '/single_pages',
         __DIR__ . '/src',
         __DIR__ . '/tests'
     ])
@@ -9,7 +13,8 @@ $finder = PhpCsFixer\Finder::create()
         __DIR__ . '/controller.php'
     ])
     ->exclude([
-        'vendor',
+        'bin',
+        'vendor'
     ]);
 
 return (new PhpCsFixer\Config())

@@ -51,6 +51,13 @@
 		]
 	},
 	"require": {
-		"limegreentangerine/class_kit": "^1.0"
-	}
+		"limegreentangerine/class_kit": "^1.0",
+		"limegreentangerine/lgt_toolkit": "0.0.0"
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://packages.limegreentangerine.net"
+		}
+	]
 }
