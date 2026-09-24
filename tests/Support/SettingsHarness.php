@@ -20,6 +20,7 @@ final class SettingsHarness
     /** @var array<string, mixed> */
     public array $vars = [];
 
+    /** Set a property on the nearest class in the hierarchy that declares it; otherwise set it as a dynamic property. */
     private static function setProp(object $obj, string $name, mixed $value): void
     {
         $ref = new \ReflectionObject($obj);
@@ -103,6 +104,7 @@ final class SettingsHarness
         return $h;
     }
 
+    /** Get the controller's protected error list. */
     public function error(): ErrorList
     {
         $p = new \ReflectionProperty(Settings::class, 'error');

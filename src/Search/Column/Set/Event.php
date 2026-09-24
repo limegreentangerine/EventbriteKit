@@ -6,6 +6,9 @@ use Concrete\Core\Search\Column\{Column, Set};
 
 class Event extends Set
 {
+    /**
+     * Define the name, start date and end date columns, with end date ascending as the default sort.
+     */
     public function __construct()
     {
         $this->addColumn(new Column('eve.name', t('Name'), 'getName', true));

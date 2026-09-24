@@ -10,6 +10,11 @@ class Event extends Item
 {
     use ItemTrait;
 
+    /**
+     * URL of the event's dashboard details page.
+     *
+     * @return \League\Url\UrlInterface
+     */
     public function getViewUrl()
     {
         return URL::to('/dashboard/eventbrite/events/details', $this->entity->getID());

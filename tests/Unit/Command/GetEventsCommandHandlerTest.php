@@ -21,6 +21,7 @@ final class GetEventsCommandHandlerTest extends TestCase
     private RecordingLogger $logger;
     private RecordingOutput $output;
 
+    /** Build a handler whose API returns $apiResponse, using the given entity manager or a mock. */
     private function handler(JsonResponse $apiResponse, ?EntityManagerInterface $em = null): GetEventsCommandHandler
     {
         \Core::bind(Eventbrite::class, new class($apiResponse) {
@@ -36,6 +37,7 @@ final class GetEventsCommandHandlerTest extends TestCase
         return $handler;
     }
 
+    /** The handler throws when the eventbrite package isn't installed. */
     public function testThrowsWhenPackageNotInstalled(): void
     {
         \Package::register('eventbrite', null);
@@ -45,6 +47,7 @@ final class GetEventsCommandHandlerTest extends TestCase
         $handler(new GetEventsCommand());
     }
 
+    /** A non-200 API response is logged and written to output, and nothing is persisted. */
     public function testNonOkStatusIsLoggedAndNothingPersisted(): void
     {
         $em = $this->createMock(EntityManagerInterface::class);
@@ -57,6 +60,7 @@ final class GetEventsCommandHandlerTest extends TestCase
         $this->assertNotEmpty($this->output->lines);
     }
 
+    /** An API result with success: false reports 'API did not connect.' */
     public function testUnsuccessfulApiResultReportsConnectionFailure(): void
     {
         $em = $this->createMock(EntityManagerInterface::class);
@@ -69,6 +73,7 @@ final class GetEventsCommandHandlerTest extends TestCase
         $this->assertSame(['API did not connect.'], $this->output->lines);
     }
 
+    /** A database error rolls back, is logged and is rethrown. */
     public function testDatabaseFailureRollsBackLogsAndRethrows(): void
     {
         $conn = $this->createMock(\Doctrine\DBAL\Connection::class);
@@ -89,6 +94,7 @@ final class GetEventsCommandHandlerTest extends TestCase
         $this->assertStringContainsString('db down', $this->logger->messages('error')[0]);
     }
 
+    /** An empty event list commits and reports zero processed. */
     public function testEmptyEventListCompletesWithZeroProcessed(): void
     {
         $em = $this->createMock(EntityManagerInterface::class);
@@ -101,6 +107,7 @@ final class GetEventsCommandHandlerTest extends TestCase
         $this->assertSame(['Event import complete. Processed: 0'], $this->output->lines);
     }
 
+    /** Register a fake package and a recording logger and output. */
     protected function setUp(): void
     {
         \Package::register('eventbrite', new FakePackage(new FakeConfig()));
@@ -109,6 +116,7 @@ final class GetEventsCommandHandlerTest extends TestCase
         \Core::bind(EventbriteLogger::class, $this->logger);
     }
 
+    /** Clear the Core and Package stubs. */
     protected function tearDown(): void
     {
         \Core::reset();

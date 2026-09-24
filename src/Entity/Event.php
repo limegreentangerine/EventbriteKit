@@ -50,6 +50,15 @@ class Event extends UpdatedGuidEntity
      */
     protected ?string $image;
 
+    /**
+     * Find the event by `eventbriteId` (or create a new one) and overwrite every field from `$data`.
+     *
+     * The event is not persisted; the caller must persist and flush it.
+     *
+     * @param array{eventbriteId: string, name: string, url: string, venue: ?string, startDate: \DateTimeImmutable, endDate: \DateTimeImmutable, description: ?string, image: ?string} $data
+     *
+     * @return self
+     */
     public static function createOrUpdate(array $data = [])
     {
         $event = self::getByColumnAndValue('eventbriteId', $data['eventbriteId']);
@@ -149,6 +158,11 @@ class Event extends UpdatedGuidEntity
         return $this->startDate;
     }
 
+    /**
+     * Start date formatted with a date() format string.
+     *
+     * @return string|null
+     */
     public function getStartDateFormatted(string $format = 'Y-m-d H:i:s')
     {
         return $this->getStartDate()?->format($format);
@@ -178,6 +192,11 @@ class Event extends UpdatedGuidEntity
         return $this->endDate;
     }
 
+    /**
+     * End date formatted with a date() format string.
+     *
+     * @return string|null
+     */
     public function getEndDateFormatted(string $format = 'Y-m-d H:i:s')
     {
         return $this->getEndDate()?->format($format);

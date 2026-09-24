@@ -69,6 +69,7 @@ final class ApiFactory
         return $self;
     }
 
+    /** The most recent request sent through the mock handler. */
     public function lastRequest(): \Psr\Http\Message\RequestInterface
     {
         return $this->history[array_key_last($this->history)]['request'];

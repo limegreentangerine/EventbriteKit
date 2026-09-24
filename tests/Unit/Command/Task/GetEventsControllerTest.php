@@ -9,6 +9,7 @@ use Eventbrite\Command\Task\Controller\GetEventsController;
 
 final class GetEventsControllerTest extends TestCase
 {
+    /** The task has the expected name and description. */
     public function testNameAndDescription(): void
     {
         $c = new GetEventsController();
@@ -16,6 +17,7 @@ final class GetEventsControllerTest extends TestCase
         $this->assertStringContainsString('Eventbrite', $c->getDescription());
     }
 
+    /** The controller source contains no copy-pasted text naming another product. */
     public function testRunnerMessageDoesNotMentionAnotherProduct(): void
     {
         $src = (string) file_get_contents(dirname(__DIR__, 4) . '/src/Command/Task/Controller/GetEventsController.php');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdce3ad4b4056642fa066ce1431249b1",
+    "content-hash": "f0d79fa2f609a06d6c3d82c95850cc15",
     "packages": [
         {
             "name": "limegreentangerine/class_kit",

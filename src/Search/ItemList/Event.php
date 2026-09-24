@@ -16,6 +16,11 @@ class Event extends ItemList implements ApplicationAwareInterface
 
     protected $prefix = 'eve';
 
+    /**
+     * Build pagination that counts distinct event IDs for the total.
+     *
+     * @return Pagination
+     */
     protected function createPaginationObject()
     {
         $adapter = new DoctrineDbalAdapter(
@@ -30,6 +35,9 @@ class Event extends ItemList implements ApplicationAwareInterface
         return new Pagination($this, $adapter);
     }
 
+    /**
+     * Select all columns from `eventbrite_events`, grouped by ID.
+     */
     public function createQuery()
     {
         $this->query->select(sprintf('%s.*', $this->prefix));
@@ -37,22 +45,43 @@ class Event extends ItemList implements ApplicationAwareInterface
         $this->query->groupBy(sprintf('%s.id', $this->prefix));
     }
 
+    /**
+     * Filter by event name.
+     *
+     * @param string $operator SQL comparison operator, e.g. '=' or 'LIKE'
+     */
     public function filterByName(string $name, string $operator = '=')
     {
         $this->filterBy(sprintf('%s.name', $this->prefix), $name, $operator);
     }
 
+    /**
+     * Filter on whether the event has ended.
+     *
+     * @param bool $flag True for events ending now or later, false for events that have already ended
+     */
     public function filterByActive(bool $flag = true)
     {
         $today = new \DateTime();
         $this->filterBy(sprintf('%s.endDate', $this->prefix), $today->format('Y-m-d H:i:s'), $flag ? '>=' : '<=');
     }
 
+    /**
+     * Sort by a column of the events table.
+     *
+     * @param string $field Column name, without the table alias
+     * @param string $order 'asc' or 'desc'
+     */
     public function sortByField(string $field = '', string $order = 'asc')
     {
         $this->query->orderBy(sprintf('%s.%s', $this->prefix, $field), $order);
     }
 
+    /**
+     * Get the IDs of all events matching the current filters.
+     *
+     * @return list<string>
+     */
     public function getResultIDs(): array
     {
         $query = $this->getQueryObject();
@@ -61,6 +90,11 @@ class Event extends ItemList implements ApplicationAwareInterface
         return $rows ?: [];
     }
 
+    /**
+     * Count the distinct events matching the current filters.
+     *
+     * @return int
+     */
     public function getTotalResults()
     {
         $query = $this->deliverQueryObject();
@@ -70,6 +104,13 @@ class Event extends ItemList implements ApplicationAwareInterface
         return (int) $query->execute()->fetchOne();
     }
 
+    /**
+     * Load the Event entity for a result row.
+     *
+     * @param array<string, mixed> $row Database row; only `id` is used
+     *
+     * @return \Eventbrite\Entity\Event|null
+     */
     public function getResult($row)
     {
         return CustomItemList::getByID($row['id']);

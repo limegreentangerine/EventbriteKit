@@ -14,6 +14,11 @@ class Settings extends DashboardPageController
         'concrete/ui',
     ];
 
+    /**
+     * Add a form error when the API key is empty.
+     *
+     * @param \Concrete\Core\Http\Request $request
+     */
     protected function validate($request)
     {
         $vstrings = $this->app->make('helper/validation/strings');
@@ -23,6 +28,9 @@ class Settings extends DashboardPageController
         }
     }
 
+    /**
+     * Load the eventbrite package and pass it to the view.
+     */
     public function on_start()
     {
         parent::on_start();
@@ -31,6 +39,15 @@ class Settings extends DashboardPageController
         $this->set('pkg', $this->pkg);
     }
 
+    /**
+     * Validate the API key and base URL and save them to the package file config.
+     *
+     * Redirects on success or on a non-POST request; on a validation error the form is re-populated.
+     *
+     * @throws UserMessageException When the eventbrite package isn't installed
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|null
+     */
     public function save()
     {
         if ($this->request->isPost()) {

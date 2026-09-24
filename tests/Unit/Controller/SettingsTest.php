@@ -12,6 +12,7 @@ final class SettingsTest extends TestCase
 {
     use MakesSettingsHarness;
 
+    /** A non-POST request redirects without saving. */
     public function testNonPostRedirectsWithoutSaving(): void
     {
         $h = $this->settings([], isPost: false);
@@ -21,6 +22,7 @@ final class SettingsTest extends TestCase
         $this->assertSame([], $h->config->all());
     }
 
+    /** A blank API key adds an error, saves nothing and re-populates the form. */
     public function testEmptyApiKeyIsRejectedAndFormRepopulated(): void
     {
         $h = $this->settings(['api_key' => '  ', 'base_url' => 'https://x.test']);
@@ -32,6 +34,7 @@ final class SettingsTest extends TestCase
         $this->assertSame(['api_key' => '  ', 'base_url' => 'https://x.test'], $h->vars['formContent']);
     }
 
+    /** An invalid CSRF token adds an error and saves nothing. */
     public function testInvalidCsrfTokenBlocksSave(): void
     {
         $h = $this->settings(['api_key' => 'k', 'base_url' => 'https://x.test'], csrfValid: false);
@@ -41,6 +44,7 @@ final class SettingsTest extends TestCase
         $this->assertSame([], $h->config->all());
     }
 
+    /** A valid POST saves both settings, shows a success flash and redirects. */
     public function testValidPostSavesConfigFlashesAndRedirects(): void
     {
         $h = $this->settings(['api_key' => 'secret', 'base_url' => 'https://api.test/v3']);
@@ -53,6 +57,7 @@ final class SettingsTest extends TestCase
         $this->assertFalse($h->error()->has());
     }
 
+    /** save() throws UserMessageException when the package is missing. */
     public function testMissingPackageThrowsUserMessageException(): void
     {
         $h = $this->settings(['api_key' => 'k'], withPackage: false);

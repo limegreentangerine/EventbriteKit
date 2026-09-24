@@ -14,6 +14,7 @@ final class SettingsPersistenceTest extends TestCase
 {
     use MakesSettingsHarness;
 
+    /** The API client uses the API key and base URL saved through Settings. */
     public function testSavedSettingsDriveTheApiConnection(): void
     {
         $h = $this->settings(['api_key' => 'saved-key', 'base_url' => 'https://saved.test/v9']);

@@ -12,6 +12,7 @@ use Eventbrite\Tests\Support\ApiFactory;
 /** Chains the endpoints the way the import does: me -> organisations -> events. */
 final class EventbriteEndpointsTest extends TestCase
 {
+    /** Calling me, organisations, then events hits each endpoint in order and uses up the mock queue. */
     public function testFullEndpointSequence(): void
     {
         $f = ApiFactory::make([
@@ -40,6 +41,7 @@ final class EventbriteEndpointsTest extends TestCase
         ], $paths);
     }
 
+    /** Every request made by getEvents() sends the bearer token. */
     public function testEveryRequestCarriesTheAuthHeader(): void
     {
         $f = ApiFactory::make([

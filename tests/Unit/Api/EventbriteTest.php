@@ -12,11 +12,13 @@ use Eventbrite\Tests\Support\FakeConfig;
 
 final class EventbriteTest extends TestCase
 {
+    /** Build a mock JSON response from a fixture file. */
     private function json(string $fixture, int $status = 200): Response
     {
         return new Response($status, ['Content-Type' => 'application/json'], Fixtures::raw($fixture));
     }
 
+    /** Requests use the configured base URL and bearer token. */
     public function testConnectionUsesConfiguredBaseUrlAndBearerToken(): void
     {
         $f = ApiFactory::make([$this->json('users_me')]);
@@ -27,6 +29,7 @@ final class EventbriteTest extends TestCase
         $this->assertSame('Bearer test-token', $request->getHeaderLine('Authorization'));
     }
 
+    /** A custom base URL and API key are used instead of the defaults. */
     public function testCustomConfigIsUsed(): void
     {
         $config = new FakeConfig(['eventbrite.base_url' => 'https://example.test/api', 'eventbrite.api_key' => 'abc']);
@@ -37,6 +40,7 @@ final class EventbriteTest extends TestCase
         $this->assertSame('Bearer abc', $f->lastRequest()->getHeaderLine('Authorization'));
     }
 
+    /** getMe() returns a 200 response as success, with the body in data. */
     public function testGetMeReturnsSuccessWithData(): void
     {
         $f = ApiFactory::make([$this->json('users_me')]);
@@ -46,6 +50,7 @@ final class EventbriteTest extends TestCase
         $this->assertSame('111', $body['data']['id']);
     }
 
+    /** Params passed to getMe() are added to the query string. */
     public function testGetMeAppendsQueryParams(): void
     {
         $f = ApiFactory::make([$this->json('users_me')]);
@@ -54,6 +59,7 @@ final class EventbriteTest extends TestCase
         $this->assertSame('expand=x', $f->lastRequest()->getUri()->getQuery());
     }
 
+    /** A 401 response gives success: false with a message. */
     public function testGetMeReportsFailureOnUnauthorised(): void
     {
         $f = ApiFactory::make([$this->json('error_401', 401)]);
@@ -63,6 +69,7 @@ final class EventbriteTest extends TestCase
         $this->assertArrayHasKey('message', $body);
     }
 
+    /** getOrganization() calls /users/me/organizations and returns its data. */
     public function testGetOrganizationHitsCorrectEndpoint(): void
     {
         $f = ApiFactory::make([$this->json('organizations')]);
@@ -73,6 +80,7 @@ final class EventbriteTest extends TestCase
         $this->assertSame('9001', $body['data']['organizations'][0]['id']);
     }
 
+    /** A 500 response gives success: false. */
     public function testGetOrganizationReportsFailureOnServerError(): void
     {
         $f = ApiFactory::make([new Response(500, [], '{"error":"boom"}')]);
@@ -81,6 +89,7 @@ final class EventbriteTest extends TestCase
         $this->assertFalse($body['success']);
     }
 
+    /** A connection failure gives success: false instead of throwing. */
     public function testGetOrganizationReportsFailureOnTransportError(): void
     {
         $f = ApiFactory::make([new \GuzzleHttp\Exception\ConnectException('down', new \GuzzleHttp\Psr7\Request('GET', '/'))]);
@@ -89,6 +98,7 @@ final class EventbriteTest extends TestCase
         $this->assertFalse($body['success']);
     }
 
+    /** getEvents() requests the first organisation's events with expand=venue. */
     public function testGetEventsUsesOrganisationIdAndExpandsVenue(): void
     {
         $f = ApiFactory::make([$this->json('organizations'), $this->json('events')]);
@@ -98,6 +108,7 @@ final class EventbriteTest extends TestCase
         $this->assertStringContainsString('expand=venue', $f->lastRequest()->getUri()->getQuery());
     }
 
+    /** getEvents() drops events that aren't live and sorts the rest by start time. */
     public function testGetEventsReturnsOnlyLiveEventsSortedByStart(): void
     {
         $f = ApiFactory::make([$this->json('organizations'), $this->json('events')]);
@@ -107,6 +118,7 @@ final class EventbriteTest extends TestCase
         $this->assertSame(['evt-early', 'evt-late'], array_column($body['data'], 'id'));
     }
 
+    /** An error from the events request gives success: false. */
     public function testGetEventsFailsWhenEventsRequestFails(): void
     {
         $f = ApiFactory::make([$this->json('organizations'), $this->json('error_401', 401)]);
@@ -115,6 +127,7 @@ final class EventbriteTest extends TestCase
         $this->assertFalse($body['success']);
     }
 
+    /** An account with no organisations gives success: false without requesting events. */
     public function testGetEventsFailsCleanlyWhenThereAreNoOrganisations(): void
     {
         $f = ApiFactory::make([$this->json('organizations_empty')]);

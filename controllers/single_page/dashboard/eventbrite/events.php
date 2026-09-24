@@ -19,16 +19,23 @@ class Events extends DashboardPageController
     protected $errors;
     protected $logger;
     protected $rf;
+    protected $headerSearch;
 
+    /**
+     * Build the header search element for the events dashboard page, reusing it on later calls.
+     *
+     * @param array<string, mixed> $params Current sticky search params
+     *
+     * @return \Concrete\Core\Filesystem\Element
+     */
     protected function getHeaderSearch($params)
     {
-        if (!isset($this->headerASearch)) {
+        if (!isset($this->headerSearch)) {
             $searchController = $this->app->make(SearchController::class);
             $paginationSizes = [];
             foreach ($searchController->getAllowedPaginationSizes() as $size) {
                 $paginationSizes[$size] = $size;
             }
-            $searching = new \Eventbrite\Search\ItemList\Event();
             $this->headerSearch = $this->app->make(ElementManager::class)->get('search/events', [
                 'token' => $this->token,
                 'headerSearchAction' => \Page::getCurrentPage()->getCollectionLink(),
@@ -37,11 +44,14 @@ class Events extends DashboardPageController
                 'urlHelper' => $this->app->make(Url::class),
                 'paginationSizes' => $paginationSizes,
             ], 'eventbrite');
-
-            return $this->headerSearch;
         }
+
+        return $this->headerSearch;
     }
 
+    /**
+     * Load the package, logger and response factory, and pass the package to the view.
+     */
     public function on_start()
     {
         parent::on_start();
@@ -51,6 +61,9 @@ class Events extends DashboardPageController
         $this->set('pkg', $this->pkg);
     }
 
+    /**
+     * List imported events using the sticky search params. A POST with a valid token resets the search first.
+     */
     public function view()
     {
         $reset = false;
@@ -81,10 +94,17 @@ class Events extends DashboardPageController
         $this->set('num_results', $num_results);
         $this->set('params', $params);
         $this->set('allowed_num_results', $allowed_num_results);
-        $this->set('token', $this->token->generate('vacancies-search'));
+        $this->set('token', $this->token->generate('events-search'));
         $this->set('headerSearch', $this->getHeaderSearch($params));
     }
 
+    /**
+     * Show one event's details, or redirect back to the list when no ID is given.
+     *
+     * @param string|null $id GUID of the event
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|null
+     */
     public function details(?string $id = null)
     {
         if (!is_null($id)) {
@@ -95,6 +115,11 @@ class Events extends DashboardPageController
         }
     }
 
+    /**
+     * Reset the stored search params and redirect back to the events list.
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function clear_search()
     {
         $search = $this->app->make(SearchController::class);

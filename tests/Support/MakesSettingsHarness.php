@@ -9,6 +9,11 @@ use Concrete\Package\Eventbrite\Controller\SinglePage\Dashboard\Eventbrite\Setti
 /** For TestCases: builds the partial Settings double (getMockBuilder is protected) and wraps it. */
 trait MakesSettingsHarness
 {
+    /**
+     * Build a Settings harness for the given POST data and request conditions.
+     *
+     * @param array<string, mixed> $post
+     */
     private function settings(array $post, bool $isPost = true, bool $csrfValid = true, bool $withPackage = true): SettingsHarness
     {
         $mock = $this->getMockBuilder(Settings::class)

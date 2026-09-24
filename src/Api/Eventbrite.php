@@ -26,13 +26,15 @@ class Eventbrite extends ConnectionController
      */
     protected $logger;
 
+    /**
+     * Configure the client from the package file config: base URL, JSON format and a bearer-token Authorization header.
+     */
     public function __construct()
     {
         $this->pkg = Package::getByHandle('eventbrite');
         $this->rf = Core::make(\Concrete\Core\Http\ResponseFactoryInterface::class);
         $this->config = $this->pkg->getFileConfig();
         $this->logger = Core::make(\Eventbrite\Log\EventbriteLogger::class)->getLogger();
-        $this->rf = Core::make(\Concrete\Core\Http\ResponseFactoryInterface::class);
 
         parent::__construct(
             $this->config->get('eventbrite.base_url'),
@@ -59,7 +61,12 @@ class Eventbrite extends ConnectionController
         }
     }
 
-    private function respond(\ClassKit\Api\Response\Response $response)
+    /**
+     * Wrap an API response as `{success: true, data}` for HTTP 200, otherwise `{success: false, message}`.
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    private function respond(\ClassKit\Api\Response\Response $response): \Symfony\Component\HttpFoundation\JsonResponse
     {
         $body = json_decode($response->getContent(), true);
 
@@ -68,12 +75,28 @@ class Eventbrite extends ConnectionController
             : $this->rf->json(['success' => false, 'message' => $body]);
     }
 
-    public function getMe(array $params = [])
+    /**
+     * Get the authenticated user (`/users/me`).
+     *
+     * @param array<string, mixed> $params Query-string parameters
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getMe(array $params = []): \Symfony\Component\HttpFoundation\JsonResponse
     {
         return $this->respond($this->request('/users/me', $params));
     }
 
-    public function getEvents(array $params = [])
+    /**
+     * Get the first organisation's live events, with venue expanded, sorted by UTC start time.
+     *
+     * Returns `success: false` when the organisation lookup fails or finds no organisation.
+     *
+     * @param array<string, mixed> $params Extra query-string parameters; `expand=venue` is always added
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getEvents(array $params = []): \Symfony\Component\HttpFoundation\JsonResponse
     {
         $organisation = json_decode($this->getOrganization()->getContent(), true);
         $organisationID = $organisation['data']['organizations'][0]['id'] ?? null;
@@ -104,7 +127,14 @@ class Eventbrite extends ConnectionController
         return $this->rf->json(['success' => true, 'data' => $events]);
     }
 
-    public function getOrganization(array $params = [])
+    /**
+     * Get the organisations the authenticated user belongs to (`/users/me/organizations`).
+     *
+     * @param array<string, mixed> $params Query-string parameters
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getOrganization(array $params = []): \Symfony\Component\HttpFoundation\JsonResponse
     {
         return $this->respond($this->request('/users/me/organizations', $params));
     }

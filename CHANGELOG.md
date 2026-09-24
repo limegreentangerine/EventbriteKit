@@ -5,6 +5,27 @@ All notable changes to Eventbrite are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 the project uses [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-09-24
+
+### Fixed
+
+- Searching events by name on the dashboard no longer fails with an undefined
+  method error; the search now uses `filterByName()`.
+- The events dashboard search token is now generated and validated under the
+  same action name (`events-search`).
+- The events dashboard header search element is now cached and reused instead
+  of being rebuilt on every call.
+- Removed a duplicate response factory assignment in the API client constructor.
+- Removed an unused item list instantiation from the events dashboard header
+  search.
+
+### Changed
+
+- Added PHPDoc comments to functions across blocks, controllers, source, and
+  tests.
+- Added native `JsonResponse` return types to the API client's public methods.
+- Loosened the `limegreentangerine/lgt_toolkit` constraint to `^0.0.0`.
+
 ## [0.1.0] - 2026-09-21
 
 ### Added

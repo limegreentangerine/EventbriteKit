@@ -17,11 +17,23 @@ class GetEventsCommandHandler implements OutputAwareInterface
     private EntityManagerInterface $entityManager;
     private $logger;
 
+    /**
+     * Inject the entity manager used to persist imported events.
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Import live events from Eventbrite.
+     *
+     * Upserts each event, then deletes events whose end date has passed, in a single transaction.
+     * API failures are logged and written to the task output rather than thrown.
+     *
+     * @throws \RuntimeException When the eventbrite package isn't installed
+     * @throws \Throwable        Rethrown after rollback when the database write fails
+     */
     public function __invoke(GetEventsCommand $command): void
     {
         $pkg = Package::getByHandle('eventbrite');

@@ -45,6 +45,11 @@ final class GetEventsImportTest extends TestCase
         ];
     }
 
+    /**
+     * Reload all events from the database, keyed by Eventbrite ID.
+     *
+     * @return array<string, Event>
+     */
     private function eventsById(): array
     {
         $this->em->clear();
@@ -56,6 +61,7 @@ final class GetEventsImportTest extends TestCase
         return $out;
     }
 
+    /** Live events are imported with every field mapped from the API payload. */
     public function testImportsLiveEventsWithMappedFields(): void
     {
         $this->runImport($this->happyResponses());
@@ -74,6 +80,7 @@ final class GetEventsImportTest extends TestCase
         $this->assertSame(['Event import complete. Processed: 2'], $this->output->lines);
     }
 
+    /** Events that aren't live (e.g. drafts) are skipped. */
     public function testDraftEventsAreNotImported(): void
     {
         $this->runImport($this->happyResponses());
@@ -81,6 +88,7 @@ final class GetEventsImportTest extends TestCase
         $this->assertArrayNotHasKey('evt-draft', $this->eventsById());
     }
 
+    /** Importing twice updates existing rows instead of inserting duplicates. */
     public function testRerunUpdatesInsteadOfDuplicating(): void
     {
         $this->runImport($this->happyResponses());
@@ -89,6 +97,7 @@ final class GetEventsImportTest extends TestCase
         $this->assertCount(2, $this->eventsById());
     }
 
+    /** Events whose end date has passed are deleted during the import. */
     public function testExpiredEventsAreDeleted(): void
     {
         $old = new Event();
@@ -105,6 +114,7 @@ final class GetEventsImportTest extends TestCase
         $this->assertCount(2, $this->eventsById());
     }
 
+    /** An API error imports nothing and logs an error. */
     public function testApiFailureImportsNothingAndReports(): void
     {
         $this->runImport([new Response(401, [], Fixtures::raw('error_401'))]);
@@ -113,6 +123,7 @@ final class GetEventsImportTest extends TestCase
         $this->assertNotEmpty($this->logger->messages('error'));
     }
 
+    /** Set up a fresh in-memory entity manager, a fake package, and a recording logger and output. */
     protected function setUp(): void
     {
         $this->em = EntityManagerFactory::create();
@@ -123,6 +134,7 @@ final class GetEventsImportTest extends TestCase
         \Core::bind(EventbriteLogger::class, $this->logger);
     }
 
+    /** Clear the ORM, Core and Package stubs. */
     protected function tearDown(): void
     {
         \ORM::setEntityManager(null);

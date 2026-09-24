@@ -14,6 +14,11 @@ class Events extends AbstractController
     private $searchList;
     private $searchResult;
 
+    /**
+     * Get the event item list, created on first use and bound to the sticky request.
+     *
+     * @return SearchList
+     */
     protected function getSearchList()
     {
         if (is_null($this->searchList)) {
@@ -23,6 +28,11 @@ class Events extends AbstractController
         return $this->searchList;
     }
 
+    /**
+     * Get the sticky request that keeps search params between page loads (`ev_events` namespace).
+     *
+     * @return StickyRequest
+     */
     public function getStickyRequest()
     {
         if (is_null($this->stickyRequest)) {
@@ -32,6 +42,11 @@ class Events extends AbstractController
         return $this->stickyRequest;
     }
 
+    /**
+     * Page sizes the search UI allows.
+     *
+     * @return list<int>
+     */
     public function getAllowedPaginationSizes()
     {
         return [
@@ -42,11 +57,23 @@ class Events extends AbstractController
         ];
     }
 
+    /**
+     * Page size to use when the request doesn't give a valid one (the smallest allowed size).
+     *
+     * @return int
+     */
     public function getDefaultPaginationSize()
     {
         return $this->getAllowedPaginationSizes()[0];
     }
 
+    /**
+     * Run the event search from the sticky request params and store the result for getSearchResultObject().
+     *
+     * Applies the default sort column, the name filter and the requested page size.
+     *
+     * @param bool $reset Clear the stored search params first
+     */
     public function search($reset = false)
     {
         $stickyRequest = $this->getStickyRequest();
@@ -70,7 +97,7 @@ class Events extends AbstractController
 
         $q = isset($req['name']) ? $req['name'] : null;
         if (is_string($q) && $q !== '') {
-            $searchList->filterByTitle($q, 'like');
+            $searchList->filterByName($q, 'like');
         }
 
         $paginationSize = null;
