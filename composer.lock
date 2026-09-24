@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "limegreentangerine/class_kit",
-            "version": "1.0.2",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/limegreentangerine/ClassKit.git",
-                "reference": "3872211b493abdad31aa4ed263f22b91998e2fa3"
+                "reference": "d3316cb3862016445a3525a21081133addbcfd62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/limegreentangerine/ClassKit/zipball/3872211b493abdad31aa4ed263f22b91998e2fa3",
-                "reference": "3872211b493abdad31aa4ed263f22b91998e2fa3",
+                "url": "https://api.github.com/repos/limegreentangerine/ClassKit/zipball/d3316cb3862016445a3525a21081133addbcfd62",
+                "reference": "d3316cb3862016445a3525a21081133addbcfd62",
                 "shasum": ""
             },
             "require-dev": {
@@ -49,9 +49,9 @@
             "description": "Collection of helper classes for LGT packages.",
             "support": {
                 "issues": "https://github.com/limegreentangerine/ClassKit/issues",
-                "source": "https://github.com/limegreentangerine/ClassKit/tree/1.0.2"
+                "source": "https://github.com/limegreentangerine/ClassKit/tree/1.0.4"
             },
-            "time": "2026-09-21T13:44:28+00:00"
+            "time": "2026-09-24T12:59:13+00:00"
         },
         {
             "name": "limegreentangerine/lgt_toolkit",
