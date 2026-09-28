@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<concrete5-cif version="1.0">
+
+    <tasks>
+        <task handle="get_events" package="eventbrite"/>
+    </tasks>
+
+    <tasksets>
+        <taskset handle="eventbrite"  name="Eventbrite" package="eventbrite">
+            <task handle="get_events"/>
+        </taskset>
+    </tasksets>
+
+</concrete5-cif>
