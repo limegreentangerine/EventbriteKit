@@ -5,6 +5,12 @@ All notable changes to EventbriteKit are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.0] - 2026-09-29
+
+### Changed
+
+- Changed name of package from `eventbrite` to `EventbriteKit`
+
 ## [0.2.0] - 2026-09-24
 
 ### Fixed
