@@ -7,12 +7,12 @@ namespace EventbriteKit\Tests\Support;
 use GuzzleHttp\Client;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\HandlerStack;
-use EventbriteKit\Api\EventbriteKit;
+use EventbriteKit\Api\Eventbrite;
 use GuzzleHttp\Handler\MockHandler;
 use ClassKit\Api\ConnectionController;
 
 /**
- * Builds a real EventbriteKit API client without Concrete: the constructor's facade calls
+ * Builds a real Eventbrite API client without Concrete: the constructor's facade calls
  * are bypassed, the ClassKit constructor still runs, and Guzzle is backed by a MockHandler.
  */
 final class ApiFactory
@@ -22,14 +22,14 @@ final class ApiFactory
 
     public MockHandler $mock;
 
-    public EventbriteKit $api;
+    public Eventbrite $api;
 
     /** @param list<\GuzzleHttp\Psr7\Response|\Throwable> $queue */
     public static function make(array $queue, ?FakeConfig $config = null): self
     {
         $config ??= new FakeConfig([
-            'EventbriteKit.base_url' => 'https://www.EventbriteKitapi.com/v3',
-            'EventbriteKit.api_key' => 'test-token',
+            'eventbrite.base_url' => 'https://www.eventbriteapi.com/v3',
+            'eventbrite.api_key' => 'test-token',
         ]);
 
         $self = new self();
@@ -37,7 +37,7 @@ final class ApiFactory
         $stack = HandlerStack::create($self->mock);
         $stack->push(Middleware::history($self->history));
 
-        $api = (new \ReflectionClass(EventbriteKit::class))->newInstanceWithoutConstructor();
+        $api = (new \ReflectionClass(Eventbrite::class))->newInstanceWithoutConstructor();
 
         $props = [
             'pkg' => new FakePackage($config),
@@ -48,7 +48,7 @@ final class ApiFactory
         ];
         foreach ($props as $name => $value) {
             $prop = new \ReflectionProperty(
-                $name === 'client' ? ConnectionController::class : EventbriteKit::class,
+                $name === 'client' ? ConnectionController::class : Eventbrite::class,
                 $name,
             );
             $prop->setValue($api, $value);
@@ -58,9 +58,9 @@ final class ApiFactory
         $client = $props['client'];
         (new \ReflectionMethod(ConnectionController::class, '__construct'))->invoke(
             $api,
-            $config->get('EventbriteKit.base_url'),
+            $config->get('eventbrite.base_url'),
             'json',
-            ['Authorization' => 'Bearer ' . $config->get('EventbriteKit.api_key')],
+            ['Authorization' => 'Bearer ' . $config->get('eventbrite.api_key')],
         );
         (new \ReflectionProperty(ConnectionController::class, 'client'))->setValue($api, $client);
 

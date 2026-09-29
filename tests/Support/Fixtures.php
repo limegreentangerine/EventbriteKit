@@ -6,10 +6,10 @@ namespace EventbriteKit\Tests\Support;
 
 final class Fixtures
 {
-    /** Read a fixture from tests/fixtures/EventbriteKit as a raw JSON string. */
+    /** Read a fixture from tests/fixtures/eventbrite as a raw JSON string. */
     public static function raw(string $name): string
     {
-        return (string) file_get_contents(dirname(__DIR__) . "/fixtures/EventbriteKit/{$name}.json");
+        return (string) file_get_contents(dirname(__DIR__) . "/fixtures/eventbrite/{$name}.json");
     }
 
     /** @return array<mixed> */

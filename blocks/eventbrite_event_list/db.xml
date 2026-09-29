@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.concrete5.org/doctrine-xml/0.5 https://concretecms.github.io/doctrine-xml/doctrine-xml-0.5.xsd">
 
-    <table name="btEventbriteKitEventList">
+    <table name="btEventbriteEventList">
         <field name="bID" type="integer">
             <unsigned/>
             <key/>

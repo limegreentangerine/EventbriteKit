@@ -1,6 +1,6 @@
 <?php defined('C5_EXECUTE') or die('Access Denied.'); ?>
 
-<section id="<?php echo $bID; ?>" class="block__EventbriteKit-event-list">
+<section id="<?php echo $bID; ?>" class="block__eventbrite-event-list">
     <div class="container">
         <div class="row">
             <div class="col-12">

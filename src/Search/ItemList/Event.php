@@ -3,8 +3,8 @@
 namespace EventbriteKit\Search\ItemList;
 
 use ClassKit\Search\ItemList\ListTrait;
-use EventbriteKit\Entity\Event as CustomItemList;
 use Concrete\Core\Search\Pagination\Pagination;
+use EventbriteKit\Entity\Event as CustomItemList;
 use Concrete\Core\Search\ItemList\Database\ItemList;
 use Pagerfanta\Doctrine\DBAL\QueryAdapter as DoctrineDbalAdapter;
 use Concrete\Core\Application\{ApplicationAwareInterface, ApplicationAwareTrait};
@@ -36,12 +36,12 @@ class Event extends ItemList implements ApplicationAwareInterface
     }
 
     /**
-     * Select all columns from `EventbriteKit_events`, grouped by ID.
+     * Select all columns from `eventbrite_events`, grouped by ID.
      */
     public function createQuery()
     {
         $this->query->select(sprintf('%s.*', $this->prefix));
-        $this->query->from('EventbriteKit_events', $this->prefix);
+        $this->query->from('eventbrite_events', $this->prefix);
         $this->query->groupBy(sprintf('%s.id', $this->prefix));
     }
 

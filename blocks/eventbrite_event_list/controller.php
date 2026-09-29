@@ -1,6 +1,6 @@
 <?php
 
-namespace Concrete\Package\EventbriteKit\Block\EventbriteKitEventList;
+namespace Concrete\Package\EventbriteKit\Block\EventbriteEventList;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
@@ -11,7 +11,7 @@ class Controller extends BlockController
 {
     use TranslationAdaptorTrait;
 
-    protected $btTable = 'btEventbriteKitEventList';
+    protected $btTable = 'btEventbriteEventList';
     protected $btDefaultSet = 'EventbriteKit';
     protected $btInterfaceWidth = 800;
     protected $btInterfaceHeight = 600;
@@ -36,7 +36,7 @@ class Controller extends BlockController
      */
     public function getBlockTypeName()
     {
-        return t('EventbriteKit Events Listing');
+        return t('Eventbrite Events Listing');
     }
 
     /**
@@ -46,7 +46,7 @@ class Controller extends BlockController
      */
     public function getBlockTypeDescription()
     {
-        return t('Carousel of EventbriteKit Events');
+        return t('Carousel of Eventbrite Events');
     }
 
     /**

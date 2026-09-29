@@ -19,7 +19,7 @@ final class EventTest extends TestCase
     private function data(): array
     {
         return [
-            'EventbriteKitId' => 'e1',
+            'eventbriteId' => 'e1',
             'name' => 'Name',
             'url' => 'https://x.test',
             'venue' => 'Hall',
@@ -46,7 +46,7 @@ final class EventTest extends TestCase
         $this->emReturning(null);
         $event = Event::createOrUpdate($this->data());
 
-        $this->assertSame('e1', $event->getEventbriteKitId());
+        $this->assertSame('e1', $event->getEventbriteId());
         $this->assertSame('Name', $event->getName());
         $this->assertSame('https://x.test', $event->getUrl());
         $this->assertSame('Hall', $event->getVenue());

@@ -26,7 +26,7 @@ class GetEventsCommandHandler implements OutputAwareInterface
     }
 
     /**
-     * Import live events from EventbriteKit.
+     * Import live events from Eventbrite.
      *
      * Upserts each event, then deletes events whose end date has passed, in a single transaction.
      * API failures are logged and written to the task output rather than thrown.
@@ -36,15 +36,15 @@ class GetEventsCommandHandler implements OutputAwareInterface
      */
     public function __invoke(GetEventsCommand $command): void
     {
-        $pkg = Package::getByHandle('EventbriteKit');
+        $pkg = Package::getByHandle('eventbrite_kit');
 
         if ($pkg === null) {
             throw new \RuntimeException('Package EventbriteKit is not installed.');
         }
 
-        $this->logger = Core::make(\EventbriteKit\Log\EventbriteKitLogger::class)->getLogger();
+        $this->logger = Core::make(\EventbriteKit\Log\EventbriteLogger::class)->getLogger();
 
-        $api = Core::make(\EventbriteKit\Api\EventbriteKit::class);
+        $api = Core::make(\EventbriteKit\Api\Eventbrite::class);
         $events = $api->getEvents();
 
         $processed = 0;
@@ -69,7 +69,7 @@ class GetEventsCommandHandler implements OutputAwareInterface
                         }
                     }
                     $evData = [
-                        'EventbriteKitId' => $data['id'],
+                        'eventbriteId' => $data['id'],
                         'name' => $data['name']['text'],
                         'url' => $data['url'],
                         'venue' => is_array($data['venue'] ?? null) ? ($data['venue']['name'] ?? null) : null,
@@ -87,7 +87,7 @@ class GetEventsCommandHandler implements OutputAwareInterface
                 try {
                     $currentDate = new DateTime();
                     $conn->executeStatement(
-                        'DELETE FROM `EventbriteKit_events` WHERE `endDate` < :expiryDate',
+                        'DELETE FROM `eventbrite_events` WHERE `endDate` < :expiryDate',
                         ['expiryDate' => $currentDate->format('Y-m-d H:i:s')],
                     );
                     $this->entityManager->flush();

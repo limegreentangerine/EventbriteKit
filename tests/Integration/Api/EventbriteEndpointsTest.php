@@ -10,7 +10,7 @@ use EventbriteKit\Tests\Support\Fixtures;
 use EventbriteKit\Tests\Support\ApiFactory;
 
 /** Chains the endpoints the way the import does: me -> organisations -> events. */
-final class EventbriteKitEndpointsTest extends TestCase
+final class EventbriteEndpointsTest extends TestCase
 {
     /** Calling me, organisations, then events hits each endpoint in order and uses up the mock queue. */
     public function testFullEndpointSequence(): void

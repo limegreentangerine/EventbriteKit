@@ -7,7 +7,7 @@ use Package;
 use ClassKit\Api\Enum\RequestMethod;
 use ClassKit\Api\ConnectionController;
 
-class EventbriteKit extends ConnectionController
+class Eventbrite extends ConnectionController
 {
     /**
      * @var Package
@@ -22,7 +22,7 @@ class EventbriteKit extends ConnectionController
      */
     protected $rf;
     /**
-     * @var \EventbriteKit\Log\EventbriteKitLogger
+     * @var \EventbriteKit\Log\EventbriteLogger
      */
     protected $logger;
 
@@ -31,15 +31,15 @@ class EventbriteKit extends ConnectionController
      */
     public function __construct()
     {
-        $this->pkg = Package::getByHandle('EventbriteKit');
+        $this->pkg = Package::getByHandle('eventbrite_kit');
         $this->rf = Core::make(\Concrete\Core\Http\ResponseFactoryInterface::class);
         $this->config = $this->pkg->getFileConfig();
-        $this->logger = Core::make(\EventbriteKit\Log\EventbriteKitLogger::class)->getLogger();
+        $this->logger = Core::make(\EventbriteKit\Log\EventbriteLogger::class)->getLogger();
 
         parent::__construct(
-            $this->config->get('EventbriteKit.base_url'),
+            $this->config->get('eventbrite.base_url'),
             'json',
-            ['Authorization' => 'Bearer ' . $this->config->get('EventbriteKit.api_key')],
+            ['Authorization' => 'Bearer ' . $this->config->get('eventbrite.api_key')],
         );
     }
 
@@ -104,7 +104,7 @@ class EventbriteKit extends ConnectionController
         if (!($organisation['success'] ?? false) || $organisationID === null) {
             return $this->rf->json([
                 'success' => false,
-                'message' => $organisation['message'] ?? 'No EventbriteKit organisation found for this account.',
+                'message' => $organisation['message'] ?? 'No Eventbrite organisation found for this account.',
             ]);
         }
 

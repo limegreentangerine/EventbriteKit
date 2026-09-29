@@ -10,7 +10,7 @@ use EventbriteKit\Tests\Support\Fixtures;
 use EventbriteKit\Tests\Support\ApiFactory;
 use EventbriteKit\Tests\Support\FakeConfig;
 
-final class EventbriteKitTest extends TestCase
+final class EventbriteTest extends TestCase
 {
     /** Build a mock JSON response from a fixture file. */
     private function json(string $fixture, int $status = 200): Response
@@ -25,14 +25,14 @@ final class EventbriteKitTest extends TestCase
         $f->api->getMe();
 
         $request = $f->lastRequest();
-        $this->assertSame('https://www.EventbriteKitapi.com/v3/users/me', (string) $request->getUri());
+        $this->assertSame('https://www.eventbriteapi.com/v3/users/me', (string) $request->getUri());
         $this->assertSame('Bearer test-token', $request->getHeaderLine('Authorization'));
     }
 
     /** A custom base URL and API key are used instead of the defaults. */
     public function testCustomConfigIsUsed(): void
     {
-        $config = new FakeConfig(['EventbriteKit.base_url' => 'https://example.test/api', 'EventbriteKit.api_key' => 'abc']);
+        $config = new FakeConfig(['eventbrite.base_url' => 'https://example.test/api', 'eventbrite.api_key' => 'abc']);
         $f = ApiFactory::make([$this->json('users_me')], $config);
         $f->api->getMe();
 

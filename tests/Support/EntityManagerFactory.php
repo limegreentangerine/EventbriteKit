@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace EventbriteKit\Tests\Support;
 
-use EventbriteKit\Entity\Event;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use EventbriteKit\Entity\Event;
 use Doctrine\ORM\Tools\SchemaTool;
 
 final class EntityManagerFactory

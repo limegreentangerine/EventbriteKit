@@ -119,7 +119,7 @@ class Events extends AbstractController
         $this->searchResult = new SearchResult(
             $columnSet,
             $searchList,
-            $this->app->make('url/manager')->resolve(['dashboard/EventbriteKit/events/']),
+            $this->app->make('url/manager')->resolve(['dashboard/eventbrite/events/']),
         );
     }
 

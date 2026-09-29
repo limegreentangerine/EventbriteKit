@@ -17,6 +17,6 @@ class Event extends Item
      */
     public function getViewUrl()
     {
-        return URL::to('/dashboard/EventbriteKit/events/details', $this->entity->getID());
+        return URL::to('/dashboard/eventbrite/events/details', $this->entity->getID());
     }
 }

@@ -13,8 +13,8 @@ final class GetEventsControllerTest extends TestCase
     public function testNameAndDescription(): void
     {
         $c = new GetEventsController();
-        $this->assertSame('Get EventbriteKit events', $c->getName());
-        $this->assertStringContainsString('EventbriteKit', $c->getDescription());
+        $this->assertSame('Get Eventbrite events', $c->getName());
+        $this->assertStringContainsString('Eventbrite', $c->getDescription());
     }
 
     /** The controller source contains no copy-pasted text naming another product. */

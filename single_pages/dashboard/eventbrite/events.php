@@ -9,7 +9,7 @@ if (in_array($controller->getTask(), ['add', 'edit', 'details', 'save'])) {
             'entity' => $entity ?? null,
             'v' => [
                 'id' => (isset($entity)) ? $entity->getID() : ((isset($formContent) && isset($formContent['id'])) ? $formContent['id'] : ''),
-                'EventbriteKitId' => (isset($entity)) ? $entity->getEventbriteKitId() : ((isset($formContent) && isset($formContent['EventbriteKitId'])) ? $formContent['EventbriteKitId'] : ''),
+                'eventbriteId' => (isset($entity)) ? $entity->getEventbriteId() : ((isset($formContent) && isset($formContent['eventbriteId'])) ? $formContent['eventbriteId'] : ''),
                 'name' => (isset($entity)) ? $entity->getName() : ((isset($formContent) && isset($formContent['name'])) ? $formContent['name'] : ''),
                 'venue' => (isset($entity)) ? $entity->getVenue() : ((isset($formContent) && isset($formContent['venue'])) ? $formContent['venue'] : ''),
                 'url' => (isset($entity)) ? $entity->getUrl() : ((isset($formContent) && isset($formContent['url'])) ? $formContent['url'] : ''),
@@ -19,7 +19,7 @@ if (in_array($controller->getTask(), ['add', 'edit', 'details', 'save'])) {
                 'image' => (isset($entity)) ? $entity->getImage() : ((isset($formContent) && isset($formContent['image'])) ? $formContent['image'] : ''),
             ],
         ],
-        'EventbriteKit',
+        'eventbrite_kit',
     );
 } else {
     View::element(

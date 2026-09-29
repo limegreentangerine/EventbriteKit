@@ -16,7 +16,7 @@ class GetEventsController extends AbstractController
      */
     public function getName(): string
     {
-        return t('Get EventbriteKit events');
+        return t('Get Eventbrite events');
     }
 
     /**
@@ -24,7 +24,7 @@ class GetEventsController extends AbstractController
      */
     public function getDescription(): string
     {
-        return t('Gets all live events from the EventbriteKit account');
+        return t('Gets all live events from the Eventbrite account');
     }
 
     /**
@@ -35,6 +35,6 @@ class GetEventsController extends AbstractController
         set_time_limit(0);
         $batch = new Batch();
         $batch->add(new CommandGetEventsCommand());
-        return new BatchProcessTaskRunner($task, $batch, $input, t('Updating events from EventbriteKit'));
+        return new BatchProcessTaskRunner($task, $batch, $input, t('Updating events from Eventbrite'));
     }
 }

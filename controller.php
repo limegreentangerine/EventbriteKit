@@ -120,9 +120,9 @@ class Controller extends PackageController
         $this->autoInstallBlocks($pkg);
 
         // dashboard pages
-        $this->addSinglePage('/dashboard/EventbriteKit', $pkg, t('EventbriteKit'));
-        $this->addSinglePage('/dashboard/EventbriteKit/settings', $pkg, t('Settings'));
-        $this->addSinglePage('/dashboard/EventbriteKit/events', $pkg, t('Events'));
+        $this->addSinglePage('/dashboard/eventbrite', $pkg, t('EventbriteKit'));
+        $this->addSinglePage('/dashboard/eventbrite/settings', $pkg, t('Settings'));
+        $this->addSinglePage('/dashboard/eventbrite/events', $pkg, t('Events'));
 
         // add tasks
         $this->installContentFile('tasks.xml');

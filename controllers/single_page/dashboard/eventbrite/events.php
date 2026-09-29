@@ -1,6 +1,6 @@
 <?php
 
-namespace Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\EventbriteKit;
+namespace Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\Eventbrite;
 
 use Concrete\Core\Utility\Service\Url;
 use Concrete\Core\Filesystem\ElementManager;
@@ -43,7 +43,7 @@ class Events extends DashboardPageController
                 'searchController' => $searchController,
                 'urlHelper' => $this->app->make(Url::class),
                 'paginationSizes' => $paginationSizes,
-            ], 'EventbriteKit');
+            ], 'eventbrite_kit');
         }
 
         return $this->headerSearch;
@@ -55,8 +55,8 @@ class Events extends DashboardPageController
     public function on_start()
     {
         parent::on_start();
-        $this->pkg = $this->app->make(\Concrete\Core\Package\PackageService::class)->getByHandle('EventbriteKit');
-        $this->logger = $this->app->make(\EventbriteKit\Log\EventbriteKitLogger::class);
+        $this->pkg = $this->app->make(\Concrete\Core\Package\PackageService::class)->getByHandle('eventbrite_kit');
+        $this->logger = $this->app->make(\EventbriteKit\Log\EventbriteLogger::class);
         $this->rf = $this->app->make(\Concrete\Core\Http\ResponseFactoryInterface::class);
         $this->set('pkg', $this->pkg);
     }
@@ -111,7 +111,7 @@ class Events extends DashboardPageController
             $entity = \EventbriteKit\Entity\Event::getByID($id);
             $this->set('entity', $entity);
         } else {
-            return $this->buildRedirect('/dashboard/EventbriteKit/events')->send();
+            return $this->buildRedirect('/dashboard/eventbrite/events')->send();
         }
     }
 
@@ -124,6 +124,6 @@ class Events extends DashboardPageController
     {
         $search = $this->app->make(SearchController::class);
         $search->search(true);
-        return $this->buildRedirect('/dashboard/EventbriteKit/events')->send();
+        return $this->buildRedirect('/dashboard/eventbrite/events')->send();
     }
 }

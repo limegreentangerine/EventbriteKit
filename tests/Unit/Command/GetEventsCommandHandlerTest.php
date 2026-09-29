@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace EventbriteKit\Tests\Unit\Command;
 
-use EventbriteKit\Api\EventbriteKit;
 use PHPUnit\Framework\TestCase;
-use EventbriteKit\Log\EventbriteKitLogger;
+use EventbriteKit\Api\Eventbrite;
+use EventbriteKit\Log\EventbriteLogger;
 use Doctrine\ORM\EntityManagerInterface;
 use EventbriteKit\Command\GetEventsCommand;
 use EventbriteKit\Tests\Support\FakeConfig;
@@ -24,7 +24,7 @@ final class GetEventsCommandHandlerTest extends TestCase
     /** Build a handler whose API returns $apiResponse, using the given entity manager or a mock. */
     private function handler(JsonResponse $apiResponse, ?EntityManagerInterface $em = null): GetEventsCommandHandler
     {
-        \Core::bind(EventbriteKit::class, new class($apiResponse) {
+        \Core::bind(Eventbrite::class, new class($apiResponse) {
             public function __construct(private JsonResponse $r) {}
             public function getEvents(): JsonResponse
             {
@@ -40,7 +40,7 @@ final class GetEventsCommandHandlerTest extends TestCase
     /** The handler throws when the EventbriteKit package isn't installed. */
     public function testThrowsWhenPackageNotInstalled(): void
     {
-        \Package::register('EventbriteKit', null);
+        \Package::register('eventbrite_kit', null);
         $handler = $this->handler(new JsonResponse([]));
 
         $this->expectException(\RuntimeException::class);
@@ -110,10 +110,10 @@ final class GetEventsCommandHandlerTest extends TestCase
     /** Register a fake package and a recording logger and output. */
     protected function setUp(): void
     {
-        \Package::register('EventbriteKit', new FakePackage(new FakeConfig()));
+        \Package::register('eventbrite_kit', new FakePackage(new FakeConfig()));
         $this->logger = new RecordingLogger();
         $this->output = new RecordingOutput();
-        \Core::bind(EventbriteKitLogger::class, $this->logger);
+        \Core::bind(EventbriteLogger::class, $this->logger);
     }
 
     /** Clear the Core and Package stubs. */

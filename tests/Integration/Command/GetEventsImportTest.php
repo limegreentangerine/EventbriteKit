@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace EventbriteKit\Tests\Integration\Command;
 
-use EventbriteKit\Entity\Event;
 use GuzzleHttp\Psr7\Response;
-use EventbriteKit\Api\EventbriteKit;
 use Doctrine\ORM\EntityManager;
+use EventbriteKit\Entity\Event;
 use PHPUnit\Framework\TestCase;
-use EventbriteKit\Log\EventbriteKitLogger;
+use EventbriteKit\Api\Eventbrite;
+use EventbriteKit\Log\EventbriteLogger;
 use EventbriteKit\Tests\Support\Fixtures;
 use EventbriteKit\Command\GetEventsCommand;
 use EventbriteKit\Tests\Support\ApiFactory;
@@ -30,7 +30,7 @@ final class GetEventsImportTest extends TestCase
     /** @param list<Response> $responses */
     private function runImport(array $responses): void
     {
-        \Core::bind(EventbriteKit::class, ApiFactory::make($responses)->api);
+        \Core::bind(Eventbrite::class, ApiFactory::make($responses)->api);
         $handler = new GetEventsCommandHandler($this->em);
         $handler->setOutput($this->output);
         $handler(new GetEventsCommand());
@@ -46,7 +46,7 @@ final class GetEventsImportTest extends TestCase
     }
 
     /**
-     * Reload all events from the database, keyed by EventbriteKit ID.
+     * Reload all events from the database, keyed by Eventbrite ID.
      *
      * @return array<string, Event>
      */
@@ -55,7 +55,7 @@ final class GetEventsImportTest extends TestCase
         $this->em->clear();
         $out = [];
         foreach ($this->em->getRepository(Event::class)->findAll() as $e) {
-            $out[$e->getEventbriteKitId()] = $e;
+            $out[$e->getEventbriteId()] = $e;
         }
 
         return $out;
@@ -70,7 +70,7 @@ final class GetEventsImportTest extends TestCase
         $this->assertSame(['evt-early', 'evt-late'], array_keys($events) === ['evt-late', 'evt-early'] ? ['evt-early', 'evt-late'] : array_keys($events));
         $late = $events['evt-late'];
         $this->assertSame('Late Event', $late->getName());
-        $this->assertSame('https://EventbriteKit.test/late', $late->getUrl());
+        $this->assertSame('https://eventbrite.test/late', $late->getUrl());
         $this->assertSame('Town Hall', $late->getVenue());
         $this->assertSame('Later summary', $late->getDescription());
         $this->assertSame('https://img.test/late.png', $late->getImage());
@@ -101,7 +101,7 @@ final class GetEventsImportTest extends TestCase
     public function testExpiredEventsAreDeleted(): void
     {
         $old = new Event();
-        $old->setEventbriteKitId('evt-old')->setName('Old')->setUrl('https://old.test')->setVenue(null)
+        $old->setEventbriteId('evt-old')->setName('Old')->setUrl('https://old.test')->setVenue(null)
             ->setStartDate(new \DateTimeImmutable('2001-01-01 10:00:00'))
             ->setEndDate(new \DateTimeImmutable('2001-01-01 12:00:00'))
             ->setDescription(null)->setImage(null);
@@ -128,10 +128,10 @@ final class GetEventsImportTest extends TestCase
     {
         $this->em = EntityManagerFactory::create();
         \ORM::setEntityManager($this->em);
-        \Package::register('EventbriteKit', new FakePackage(new FakeConfig()));
+        \Package::register('eventbrite_kit', new FakePackage(new FakeConfig()));
         $this->logger = new RecordingLogger();
         $this->output = new RecordingOutput();
-        \Core::bind(EventbriteKitLogger::class, $this->logger);
+        \Core::bind(EventbriteLogger::class, $this->logger);
     }
 
     /** Clear the ORM, Core and Package stubs. */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\EventbriteKit;
+namespace Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\Eventbrite;
 
 use Package;
 use Concrete\Core\Error\UserMessageException;
@@ -35,7 +35,7 @@ class Settings extends DashboardPageController
     {
         parent::on_start();
 
-        $this->pkg = Package::getByHandle('EventbriteKit');
+        $this->pkg = Package::getByHandle('eventbrite_kit');
         $this->set('pkg', $this->pkg);
     }
 
@@ -64,16 +64,16 @@ class Settings extends DashboardPageController
             $this->validate($this->request);
 
             if (!$this->error->has()) {
-                $config->save('EventbriteKit.api_key', $this->request->request('api_key'));
-                $config->save('EventbriteKit.base_url', $this->request->request('base_url'));
+                $config->save('eventbrite.api_key', $this->request->request('api_key'));
+                $config->save('eventbrite.base_url', $this->request->request('base_url'));
 
                 $this->flash('success', t('EventbriteKit settings saved.'));
-                return $this->buildRedirect('/dashboard/EventbriteKit/settings')->send();
+                return $this->buildRedirect('/dashboard/eventbrite/settings')->send();
             }
             $this->set('formContent', $this->request->request());
 
         } else {
-            return $this->buildRedirect('/dashboard/EventbriteKit/settings')->send();
+            return $this->buildRedirect('/dashboard/eventbrite/settings')->send();
         }
     }
 }

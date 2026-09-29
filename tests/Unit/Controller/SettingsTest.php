@@ -18,7 +18,7 @@ final class SettingsTest extends TestCase
         $h = $this->settings([], isPost: false);
         $h->controller->save();
 
-        $this->assertSame(['/dashboard/EventbriteKit/settings'], $h->redirects);
+        $this->assertSame(['/dashboard/eventbrite/settings'], $h->redirects);
         $this->assertSame([], $h->config->all());
     }
 
@@ -50,10 +50,10 @@ final class SettingsTest extends TestCase
         $h = $this->settings(['api_key' => 'secret', 'base_url' => 'https://api.test/v3']);
         $h->controller->save();
 
-        $this->assertSame('secret', $h->config->get('EventbriteKit.api_key'));
-        $this->assertSame('https://api.test/v3', $h->config->get('EventbriteKit.base_url'));
+        $this->assertSame('secret', $h->config->get('eventbrite.api_key'));
+        $this->assertSame('https://api.test/v3', $h->config->get('eventbrite.base_url'));
         $this->assertSame([['success', 'EventbriteKit settings saved.']], $h->flashes);
-        $this->assertSame(['/dashboard/EventbriteKit/settings'], $h->redirects);
+        $this->assertSame(['/dashboard/eventbrite/settings'], $h->redirects);
         $this->assertFalse($h->error()->has());
     }
 
