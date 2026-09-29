@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Search\Result;
+namespace EventbriteKit\Search\Result;
 
 use ClassKit\Search\Result as SearchResult;
 
@@ -9,7 +9,7 @@ class Event extends SearchResult
     /**
      * Wrap a result entity in the package's search result item.
      *
-     * @param \Eventbrite\Entity\Event $result
+     * @param \EventbriteKit\Entity\Event $result
      *
      * @return Item\Event
      */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Entity;
+namespace EventbriteKit\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ClassKit\Entity\Core\UpdatedGuidEntity;

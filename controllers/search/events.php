@@ -1,12 +1,12 @@
 <?php
 
-namespace Concrete\Package\Eventbrite\Controller\Search;
+namespace Concrete\Package\EventbriteKit\Controller\Search;
 
 use Concrete\Core\Search\StickyRequest;
 use Concrete\Core\Controller\AbstractController;
-use Eventbrite\Search\ItemList\Event as SearchList;
-use Eventbrite\Search\Result\Event as SearchResult;
-use Eventbrite\Search\Column\Set\Event as ColumnSet;
+use EventbriteKit\Search\ItemList\Event as SearchList;
+use EventbriteKit\Search\Result\Event as SearchResult;
+use EventbriteKit\Search\Column\Set\Event as ColumnSet;
 
 class Events extends AbstractController
 {

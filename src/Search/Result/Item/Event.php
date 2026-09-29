@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Search\Result\Item;
+namespace EventbriteKit\Search\Result\Item;
 
 use URL;
 use Concrete\Core\Search\Result\Item;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Eventbrite\Search\ItemList;
+namespace EventbriteKit\Search\ItemList;
 
 use ClassKit\Search\ItemList\ListTrait;
-use Eventbrite\Entity\Event as CustomItemList;
 use Concrete\Core\Search\Pagination\Pagination;
+use EventbriteKit\Entity\Event as CustomItemList;
 use Concrete\Core\Search\ItemList\Database\ItemList;
 use Pagerfanta\Doctrine\DBAL\QueryAdapter as DoctrineDbalAdapter;
 use Concrete\Core\Application\{ApplicationAwareInterface, ApplicationAwareTrait};
@@ -109,7 +109,7 @@ class Event extends ItemList implements ApplicationAwareInterface
      *
      * @param array<string, mixed> $row Database row; only `id` is used
      *
-     * @return \Eventbrite\Entity\Event|null
+     * @return \EventbriteKit\Entity\Event|null
      */
     public function getResult($row)
     {

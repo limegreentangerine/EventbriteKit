@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Controller;
+namespace EventbriteKit\Tests\Unit\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Concrete\Core\Error\UserMessageException;
-use Eventbrite\Tests\Support\MakesSettingsHarness;
+use EventbriteKit\Tests\Support\MakesSettingsHarness;
 
 final class SettingsTest extends TestCase
 {
@@ -52,7 +52,7 @@ final class SettingsTest extends TestCase
 
         $this->assertSame('secret', $h->config->get('eventbrite.api_key'));
         $this->assertSame('https://api.test/v3', $h->config->get('eventbrite.base_url'));
-        $this->assertSame([['success', 'Eventbrite settings saved.']], $h->flashes);
+        $this->assertSame([['success', 'EventbriteKit settings saved.']], $h->flashes);
         $this->assertSame(['/dashboard/eventbrite/settings'], $h->redirects);
         $this->assertFalse($h->error()->has());
     }

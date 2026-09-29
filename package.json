@@ -1,6 +1,6 @@
 {
-	"name": "eventbrite",
-	"version": "1.0.1.beta0.0.1",
+	"name": "eventbrite_kit",
+	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"directories": {
@@ -11,16 +11,16 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/limegreentangerine/eventbrite.git"
+		"url": "git+https://github.com/limegreentangerine/EventbriteKit.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"type": "commonjs",
 	"bugs": {
-		"url": "https://github.com/limegreentangerine/eventbrite/issues"
+		"url": "https://github.com/limegreentangerine/EventbriteKit/issues"
 	},
-	"homepage": "https://github.com/limegreentangerine/eventbrite#readme",
+	"homepage": "https://github.com/limegreentangerine/EventbriteKit#readme",
 	"devDependencies": {
 		"prettier": "^3.9.6"
 	}

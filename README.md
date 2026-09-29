@@ -7,7 +7,7 @@ Do a find and replace on the following fields before you start, best to make the
 `composer_package` - the package handle
 `composer_description` - the description of the package
 `ComposerPackage` - the namespace of the package
-`composer_name` - the package name
+`alto` - the package name
 
 ## Authors
 

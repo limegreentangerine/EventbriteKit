@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Api;
+namespace EventbriteKit\Tests\Unit\Api;
 
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Tests\Support\Fixtures;
-use Eventbrite\Tests\Support\ApiFactory;
-use Eventbrite\Tests\Support\FakeConfig;
+use EventbriteKit\Tests\Support\Fixtures;
+use EventbriteKit\Tests\Support\ApiFactory;
+use EventbriteKit\Tests\Support\FakeConfig;
 
 final class EventbriteTest extends TestCase
 {

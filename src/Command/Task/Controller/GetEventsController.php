@@ -1,12 +1,12 @@
 <?php
 
-namespace Eventbrite\Command\Task\Controller;
+namespace EventbriteKit\Command\Task\Controller;
 
 use Concrete\Core\Command\Batch\Batch;
 use Concrete\Core\Command\Task\TaskInterface;
 use Concrete\Core\Command\Task\Input\InputInterface;
 use Concrete\Core\Command\Task\Controller\AbstractController;
-use Eventbrite\Command\GetEventsCommand as CommandGetEventsCommand;
+use EventbriteKit\Command\GetEventsCommand as CommandGetEventsCommand;
 use Concrete\Core\Command\Task\Runner\{BatchProcessTaskRunner, TaskRunnerInterface};
 
 class GetEventsController extends AbstractController

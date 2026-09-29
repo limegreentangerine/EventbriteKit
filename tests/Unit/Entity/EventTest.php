@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Entity;
+namespace EventbriteKit\Tests\Unit\Entity;
 
-use Eventbrite\Entity\Event;
+use EventbriteKit\Entity\Event;
 use PHPUnit\Framework\TestCase;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;

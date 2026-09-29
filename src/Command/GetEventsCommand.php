@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Command;
+namespace EventbriteKit\Command;
 
 use Concrete\Core\Foundation\Command\Command;
 

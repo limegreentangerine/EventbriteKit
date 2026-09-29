@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Command;
+namespace EventbriteKit\Tests\Unit\Command;
 
-use Eventbrite\Api\Eventbrite;
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Log\EventbriteLogger;
+use EventbriteKit\Api\Eventbrite;
+use EventbriteKit\Log\EventbriteLogger;
 use Doctrine\ORM\EntityManagerInterface;
-use Eventbrite\Command\GetEventsCommand;
-use Eventbrite\Tests\Support\FakeConfig;
-use Eventbrite\Tests\Support\FakePackage;
-use Eventbrite\Tests\Support\RecordingLogger;
-use Eventbrite\Tests\Support\RecordingOutput;
-use Eventbrite\Command\GetEventsCommandHandler;
+use EventbriteKit\Command\GetEventsCommand;
+use EventbriteKit\Tests\Support\FakeConfig;
+use EventbriteKit\Tests\Support\FakePackage;
+use EventbriteKit\Tests\Support\RecordingLogger;
+use EventbriteKit\Tests\Support\RecordingOutput;
+use EventbriteKit\Command\GetEventsCommandHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class GetEventsCommandHandlerTest extends TestCase
@@ -37,10 +37,10 @@ final class GetEventsCommandHandlerTest extends TestCase
         return $handler;
     }
 
-    /** The handler throws when the eventbrite package isn't installed. */
+    /** The handler throws when the EventbriteKit package isn't installed. */
     public function testThrowsWhenPackageNotInstalled(): void
     {
-        \Package::register('eventbrite', null);
+        \Package::register('eventbrite_kit', null);
         $handler = $this->handler(new JsonResponse([]));
 
         $this->expectException(\RuntimeException::class);
@@ -110,7 +110,7 @@ final class GetEventsCommandHandlerTest extends TestCase
     /** Register a fake package and a recording logger and output. */
     protected function setUp(): void
     {
-        \Package::register('eventbrite', new FakePackage(new FakeConfig()));
+        \Package::register('eventbrite_kit', new FakePackage(new FakeConfig()));
         $this->logger = new RecordingLogger();
         $this->output = new RecordingOutput();
         \Core::bind(EventbriteLogger::class, $this->logger);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Api;
+namespace EventbriteKit\Api;
 
 use Core;
 use Package;
@@ -22,7 +22,7 @@ class Eventbrite extends ConnectionController
      */
     protected $rf;
     /**
-     * @var \Eventbrite\Log\EventbriteLogger
+     * @var \EventbriteKit\Log\EventbriteLogger
      */
     protected $logger;
 
@@ -31,10 +31,10 @@ class Eventbrite extends ConnectionController
      */
     public function __construct()
     {
-        $this->pkg = Package::getByHandle('eventbrite');
+        $this->pkg = Package::getByHandle('eventbrite_kit');
         $this->rf = Core::make(\Concrete\Core\Http\ResponseFactoryInterface::class);
         $this->config = $this->pkg->getFileConfig();
-        $this->logger = Core::make(\Eventbrite\Log\EventbriteLogger::class)->getLogger();
+        $this->logger = Core::make(\EventbriteKit\Log\EventbriteLogger::class)->getLogger();
 
         parent::__construct(
             $this->config->get('eventbrite.base_url'),

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Support;
+namespace EventbriteKit\Tests\Support;
 
 use PHPUnit\Framework\TestCase;
 use Concrete\Core\Error\ErrorList\ErrorList;
-use Concrete\Package\Eventbrite\Controller\SinglePage\Dashboard\Eventbrite\Settings;
+use Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\Eventbrite\Settings;
 
 /** Builds a Settings controller with fake request/token/app so save() runs without Concrete. */
 final class SettingsHarness

@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Integration\Command;
+namespace EventbriteKit\Tests\Integration\Command;
 
-use Eventbrite\Entity\Event;
 use GuzzleHttp\Psr7\Response;
-use Eventbrite\Api\Eventbrite;
 use Doctrine\ORM\EntityManager;
+use EventbriteKit\Entity\Event;
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Log\EventbriteLogger;
-use Eventbrite\Tests\Support\Fixtures;
-use Eventbrite\Command\GetEventsCommand;
-use Eventbrite\Tests\Support\ApiFactory;
-use Eventbrite\Tests\Support\FakeConfig;
-use Eventbrite\Tests\Support\FakePackage;
-use Eventbrite\Tests\Support\RecordingLogger;
-use Eventbrite\Tests\Support\RecordingOutput;
-use Eventbrite\Command\GetEventsCommandHandler;
-use Eventbrite\Tests\Support\EntityManagerFactory;
+use EventbriteKit\Api\Eventbrite;
+use EventbriteKit\Log\EventbriteLogger;
+use EventbriteKit\Tests\Support\Fixtures;
+use EventbriteKit\Command\GetEventsCommand;
+use EventbriteKit\Tests\Support\ApiFactory;
+use EventbriteKit\Tests\Support\FakeConfig;
+use EventbriteKit\Tests\Support\FakePackage;
+use EventbriteKit\Tests\Support\RecordingLogger;
+use EventbriteKit\Tests\Support\RecordingOutput;
+use EventbriteKit\Command\GetEventsCommandHandler;
+use EventbriteKit\Tests\Support\EntityManagerFactory;
 
 /** Real handler + real API client (mocked HTTP) + real Doctrine on in-memory SQLite. */
 final class GetEventsImportTest extends TestCase
@@ -128,7 +128,7 @@ final class GetEventsImportTest extends TestCase
     {
         $this->em = EntityManagerFactory::create();
         \ORM::setEntityManager($this->em);
-        \Package::register('eventbrite', new FakePackage(new FakeConfig()));
+        \Package::register('eventbrite_kit', new FakePackage(new FakeConfig()));
         $this->logger = new RecordingLogger();
         $this->output = new RecordingOutput();
         \Core::bind(EventbriteLogger::class, $this->logger);

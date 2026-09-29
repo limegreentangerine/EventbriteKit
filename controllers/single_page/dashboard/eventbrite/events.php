@@ -1,11 +1,11 @@
 <?php
 
-namespace Concrete\Package\Eventbrite\Controller\SinglePage\Dashboard\Eventbrite;
+namespace Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\Eventbrite;
 
 use Concrete\Core\Utility\Service\Url;
 use Concrete\Core\Filesystem\ElementManager;
 use Concrete\Core\Page\Controller\DashboardPageController;
-use Concrete\Package\Eventbrite\Controller\Search\Events as SearchController;
+use Concrete\Package\EventbriteKit\Controller\Search\Events as SearchController;
 
 class Events extends DashboardPageController
 {
@@ -43,7 +43,7 @@ class Events extends DashboardPageController
                 'searchController' => $searchController,
                 'urlHelper' => $this->app->make(Url::class),
                 'paginationSizes' => $paginationSizes,
-            ], 'eventbrite');
+            ], 'eventbrite_kit');
         }
 
         return $this->headerSearch;
@@ -55,8 +55,8 @@ class Events extends DashboardPageController
     public function on_start()
     {
         parent::on_start();
-        $this->pkg = $this->app->make(\Concrete\Core\Package\PackageService::class)->getByHandle('eventbrite');
-        $this->logger = $this->app->make(\Eventbrite\Log\EventbriteLogger::class);
+        $this->pkg = $this->app->make(\Concrete\Core\Package\PackageService::class)->getByHandle('eventbrite_kit');
+        $this->logger = $this->app->make(\EventbriteKit\Log\EventbriteLogger::class);
         $this->rf = $this->app->make(\Concrete\Core\Http\ResponseFactoryInterface::class);
         $this->set('pkg', $this->pkg);
     }
@@ -108,7 +108,7 @@ class Events extends DashboardPageController
     public function details(?string $id = null)
     {
         if (!is_null($id)) {
-            $entity = \Eventbrite\Entity\Event::getByID($id);
+            $entity = \EventbriteKit\Entity\Event::getByID($id);
             $this->set('entity', $entity);
         } else {
             return $this->buildRedirect('/dashboard/eventbrite/events')->send();

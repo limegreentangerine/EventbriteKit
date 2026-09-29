@@ -19,7 +19,7 @@ if (in_array($controller->getTask(), ['add', 'edit', 'details', 'save'])) {
                 'image' => (isset($entity)) ? $entity->getImage() : ((isset($formContent) && isset($formContent['image'])) ? $formContent['image'] : ''),
             ],
         ],
-        'eventbrite',
+        'eventbrite_kit',
     );
 } else {
     View::element(

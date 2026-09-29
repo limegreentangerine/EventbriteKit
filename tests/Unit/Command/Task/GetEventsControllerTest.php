@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Command\Task;
+namespace EventbriteKit\Tests\Unit\Command\Task;
 
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Command\Task\Controller\GetEventsController;
+use EventbriteKit\Command\Task\Controller\GetEventsController;
 
 final class GetEventsControllerTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Support;
+namespace EventbriteKit\Tests\Support;
 
 final class FakeConfig
 {

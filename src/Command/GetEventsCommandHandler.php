@@ -1,11 +1,11 @@
 <?php
 
-namespace Eventbrite\Command;
+namespace EventbriteKit\Command;
 
 use Core;
 use Package;
 use DateTime;
-use Eventbrite\Entity\Event;
+use EventbriteKit\Entity\Event;
 use Doctrine\ORM\EntityManagerInterface;
 use Concrete\Core\Command\Task\Output\OutputAwareTrait;
 use Concrete\Core\Command\Task\Output\OutputAwareInterface;
@@ -31,20 +31,20 @@ class GetEventsCommandHandler implements OutputAwareInterface
      * Upserts each event, then deletes events whose end date has passed, in a single transaction.
      * API failures are logged and written to the task output rather than thrown.
      *
-     * @throws \RuntimeException When the eventbrite package isn't installed
+     * @throws \RuntimeException When the EventbriteKit package isn't installed
      * @throws \Throwable        Rethrown after rollback when the database write fails
      */
     public function __invoke(GetEventsCommand $command): void
     {
-        $pkg = Package::getByHandle('eventbrite');
+        $pkg = Package::getByHandle('eventbrite_kit');
 
         if ($pkg === null) {
-            throw new \RuntimeException('Package eventbrite is not installed.');
+            throw new \RuntimeException('Package EventbriteKit is not installed.');
         }
 
-        $this->logger = Core::make(\Eventbrite\Log\EventbriteLogger::class)->getLogger();
+        $this->logger = Core::make(\EventbriteKit\Log\EventbriteLogger::class)->getLogger();
 
-        $api = Core::make(\Eventbrite\Api\Eventbrite::class);
+        $api = Core::make(\EventbriteKit\Api\Eventbrite::class);
         $events = $api->getEvents();
 
         $processed = 0;

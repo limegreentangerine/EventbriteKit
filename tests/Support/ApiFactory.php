@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Support;
+namespace EventbriteKit\Tests\Support;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\HandlerStack;
-use Eventbrite\Api\Eventbrite;
+use EventbriteKit\Api\Eventbrite;
 use GuzzleHttp\Handler\MockHandler;
 use ClassKit\Api\ConnectionController;
 

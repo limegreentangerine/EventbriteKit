@@ -1,6 +1,6 @@
 <?php
 
-namespace Concrete\Package\Eventbrite;
+namespace Concrete\Package\EventbriteKit;
 
 use Concrete\Core\Entity\Package;
 use ClassKit\Package\Traits\PageTrait;
@@ -19,14 +19,14 @@ class Controller extends PackageController
      *
      * @var string
      */
-    protected $pkgHandle = 'eventbrite';
+    protected $pkgHandle = 'eventbrite_kit';
 
     /**
      * The packages version.
      *
      * @var string
      */
-    protected $pkgVersion = '0.2.0';
+    protected $pkgVersion = '1.0.0';
 
     /**
      * The minimum Concrete version compatible with the package.
@@ -90,7 +90,7 @@ class Controller extends PackageController
      * @var array
      */
     protected $pkgAutoloaderRegistries = [
-        'src' => '\Eventbrite',
+        'src' => '\EventbriteKit',
     ];
 
     /**
@@ -101,7 +101,7 @@ class Controller extends PackageController
      * @var array
      */
     protected $tasks = [
-        'get_events' => \Eventbrite\Command\Task\Controller\GetEventsController::class,
+        'get_events' => \EventbriteKit\Command\Task\Controller\GetEventsController::class,
     ];
 
     public function getPackageName()
@@ -120,7 +120,7 @@ class Controller extends PackageController
         $this->autoInstallBlocks($pkg);
 
         // dashboard pages
-        $this->addSinglePage('/dashboard/eventbrite', $pkg, t('Eventbrite'));
+        $this->addSinglePage('/dashboard/eventbrite', $pkg, t('EventbriteKit'));
         $this->addSinglePage('/dashboard/eventbrite/settings', $pkg, t('Settings'));
         $this->addSinglePage('/dashboard/eventbrite/events', $pkg, t('Events'));
 
