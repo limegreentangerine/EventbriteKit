@@ -15,7 +15,7 @@ $form = \Core::make(Form::class);
 
         <div class="ccm-header-search-form-input input-group">
             <?php if (isset($params) && !empty($params)) { ?>
-                <a href="<?php echo URL::to('/dashboard/eventbrite/events/clear_search'); ?>" class="btn btn-link">
+                <a href="<?php echo URL::to('/dashboard/EventbriteKit/events/clear_search'); ?>" class="btn btn-link">
                     <?php echo t('Clear Search'); ?>
                 </a>
             <?php } ?>

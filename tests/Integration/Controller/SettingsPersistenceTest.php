@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Integration\Controller;
+namespace EventbriteKit\Tests\Integration\Controller;
 
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Tests\Support\ApiFactory;
-use Eventbrite\Tests\Support\MakesSettingsHarness;
+use EventbriteKit\Tests\Support\ApiFactory;
+use EventbriteKit\Tests\Support\MakesSettingsHarness;
 
 /** Settings saved through the controller are what the API client then connects with. */
 final class SettingsPersistenceTest extends TestCase

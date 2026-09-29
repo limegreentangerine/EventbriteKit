@@ -3,7 +3,7 @@
   "events": [
     {
       "id": "evt-late", "status": "live",
-      "name": {"text": "Late Event"}, "url": "https://eventbrite.test/late", "summary": "Later summary",
+      "name": {"text": "Late Event"}, "url": "https://EventbriteKit.test/late", "summary": "Later summary",
       "start": {"local": "2099-06-02T19:00:00", "utc": "2099-06-02T18:00:00Z"},
       "end": {"local": "2099-06-02T21:00:00", "utc": "2099-06-02T20:00:00Z"},
       "venue": {"name": "Town Hall", "address": {"city": "Leeds"}},
@@ -11,7 +11,7 @@
     },
     {
       "id": "evt-early", "status": "live",
-      "name": {"text": "Early Event"}, "url": "https://eventbrite.test/early", "summary": "Early summary",
+      "name": {"text": "Early Event"}, "url": "https://EventbriteKit.test/early", "summary": "Early summary",
       "start": {"local": "2099-06-01T19:00:00", "utc": "2099-06-01T18:00:00Z"},
       "end": {"local": "2099-06-01T21:00:00", "utc": "2099-06-01T20:00:00Z"},
       "venue": {"name": "Library", "address": {"city": "York"}},
@@ -19,7 +19,7 @@
     },
     {
       "id": "evt-draft", "status": "draft",
-      "name": {"text": "Draft Event"}, "url": "https://eventbrite.test/draft", "summary": "Draft",
+      "name": {"text": "Draft Event"}, "url": "https://EventbriteKit.test/draft", "summary": "Draft",
       "start": {"local": "2099-07-01T19:00:00", "utc": "2099-07-01T18:00:00Z"},
       "end": {"local": "2099-07-01T21:00:00", "utc": "2099-07-01T20:00:00Z"},
       "venue": null,

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Entity;
+namespace EventbriteKit\Tests\Unit\Entity;
 
-use Eventbrite\Entity\Event;
+use EventbriteKit\Entity\Event;
 use PHPUnit\Framework\TestCase;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +19,7 @@ final class EventTest extends TestCase
     private function data(): array
     {
         return [
-            'eventbriteId' => 'e1',
+            'EventbriteKitId' => 'e1',
             'name' => 'Name',
             'url' => 'https://x.test',
             'venue' => 'Hall',
@@ -46,7 +46,7 @@ final class EventTest extends TestCase
         $this->emReturning(null);
         $event = Event::createOrUpdate($this->data());
 
-        $this->assertSame('e1', $event->getEventbriteId());
+        $this->assertSame('e1', $event->getEventbriteKitId());
         $this->assertSame('Name', $event->getName());
         $this->assertSame('https://x.test', $event->getUrl());
         $this->assertSame('Hall', $event->getVenue());

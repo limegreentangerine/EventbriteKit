@@ -1,11 +1,11 @@
 <?php
 
-namespace Eventbrite\Command;
+namespace EventbriteKit\Command;
 
 use Core;
 use Package;
 use DateTime;
-use Eventbrite\Entity\Event;
+use EventbriteKit\Entity\Event;
 use Doctrine\ORM\EntityManagerInterface;
 use Concrete\Core\Command\Task\Output\OutputAwareTrait;
 use Concrete\Core\Command\Task\Output\OutputAwareInterface;
@@ -26,25 +26,25 @@ class GetEventsCommandHandler implements OutputAwareInterface
     }
 
     /**
-     * Import live events from Eventbrite.
+     * Import live events from EventbriteKit.
      *
      * Upserts each event, then deletes events whose end date has passed, in a single transaction.
      * API failures are logged and written to the task output rather than thrown.
      *
-     * @throws \RuntimeException When the eventbrite package isn't installed
+     * @throws \RuntimeException When the EventbriteKit package isn't installed
      * @throws \Throwable        Rethrown after rollback when the database write fails
      */
     public function __invoke(GetEventsCommand $command): void
     {
-        $pkg = Package::getByHandle('eventbrite');
+        $pkg = Package::getByHandle('EventbriteKit');
 
         if ($pkg === null) {
-            throw new \RuntimeException('Package eventbrite is not installed.');
+            throw new \RuntimeException('Package EventbriteKit is not installed.');
         }
 
-        $this->logger = Core::make(\Eventbrite\Log\EventbriteLogger::class)->getLogger();
+        $this->logger = Core::make(\EventbriteKit\Log\EventbriteKitLogger::class)->getLogger();
 
-        $api = Core::make(\Eventbrite\Api\Eventbrite::class);
+        $api = Core::make(\EventbriteKit\Api\EventbriteKit::class);
         $events = $api->getEvents();
 
         $processed = 0;
@@ -69,7 +69,7 @@ class GetEventsCommandHandler implements OutputAwareInterface
                         }
                     }
                     $evData = [
-                        'eventbriteId' => $data['id'],
+                        'EventbriteKitId' => $data['id'],
                         'name' => $data['name']['text'],
                         'url' => $data['url'],
                         'venue' => is_array($data['venue'] ?? null) ? ($data['venue']['name'] ?? null) : null,
@@ -87,7 +87,7 @@ class GetEventsCommandHandler implements OutputAwareInterface
                 try {
                     $currentDate = new DateTime();
                     $conn->executeStatement(
-                        'DELETE FROM `eventbrite_events` WHERE `endDate` < :expiryDate',
+                        'DELETE FROM `EventbriteKit_events` WHERE `endDate` < :expiryDate',
                         ['expiryDate' => $currentDate->format('Y-m-d H:i:s')],
                     );
                     $this->entityManager->flush();

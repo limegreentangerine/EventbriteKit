@@ -4,8 +4,8 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <?php
-                        echo $form->label('eventbriteId', t('Eventbrite ID'));
-                    echo $form->text('eventbriteId', $v['eventbriteId'], ['readonly' => 'readonly']);
+                        echo $form->label('EventbriteKitId', t('EventbriteKit ID'));
+                    echo $form->text('EventbriteKitId', $v['EventbriteKitId'], ['readonly' => 'readonly']);
                     ?>
                 </div>
             </div>
@@ -71,7 +71,7 @@
     </fieldset>
     <div class="ccm-dashboard-form-actions-wrapper">
         <div class="ccm-dashboard-form-actions">
-            <a href="<?php echo \URL::to('/dashboard/eventbrite/events'); ?>" class="btn btn-secondary float-start"><?php echo t('Back to Events'); ?></a>
+            <a href="<?php echo \URL::to('/dashboard/EventbriteKit/events'); ?>" class="btn btn-secondary float-start"><?php echo t('Back to Events'); ?></a>
             <a href="<?php echo $v['url']; ?>" target="_blank" class="btn btn-primary float-end"><?php echo t('View Event'); ?></a>
         </div>
     </div>

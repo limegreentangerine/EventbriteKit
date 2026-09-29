@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Support;
+namespace EventbriteKit\Tests\Support;
 
-use Concrete\Package\Eventbrite\Controller\SinglePage\Dashboard\Eventbrite\Settings;
+use Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\EventbriteKit\Settings;
 
 /** For TestCases: builds the partial Settings double (getMockBuilder is protected) and wraps it. */
 trait MakesSettingsHarness

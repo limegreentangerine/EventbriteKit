@@ -1,6 +1,6 @@
 <?php
 
-namespace Concrete\Package\Eventbrite\Controller\SinglePage\Dashboard\Eventbrite;
+namespace Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard\EventbriteKit;
 
 use Package;
 use Concrete\Core\Error\UserMessageException;
@@ -29,13 +29,13 @@ class Settings extends DashboardPageController
     }
 
     /**
-     * Load the eventbrite package and pass it to the view.
+     * Load the EventbriteKit package and pass it to the view.
      */
     public function on_start()
     {
         parent::on_start();
 
-        $this->pkg = Package::getByHandle('eventbrite');
+        $this->pkg = Package::getByHandle('EventbriteKit');
         $this->set('pkg', $this->pkg);
     }
 
@@ -44,7 +44,7 @@ class Settings extends DashboardPageController
      *
      * Redirects on success or on a non-POST request; on a validation error the form is re-populated.
      *
-     * @throws UserMessageException When the eventbrite package isn't installed
+     * @throws UserMessageException When the EventbriteKit package isn't installed
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|null
      */
@@ -56,7 +56,7 @@ class Settings extends DashboardPageController
             }
 
             if (!is_object($this->pkg)) {
-                throw new UserMessageException(t('Eventbrite Package not found'));
+                throw new UserMessageException(t('EventbriteKit Package not found'));
             }
             $config = $this->pkg->getFileConfig();
 
@@ -64,16 +64,16 @@ class Settings extends DashboardPageController
             $this->validate($this->request);
 
             if (!$this->error->has()) {
-                $config->save('eventbrite.api_key', $this->request->request('api_key'));
-                $config->save('eventbrite.base_url', $this->request->request('base_url'));
+                $config->save('EventbriteKit.api_key', $this->request->request('api_key'));
+                $config->save('EventbriteKit.base_url', $this->request->request('base_url'));
 
-                $this->flash('success', t('Eventbrite settings saved.'));
-                return $this->buildRedirect('/dashboard/eventbrite/settings')->send();
+                $this->flash('success', t('EventbriteKit settings saved.'));
+                return $this->buildRedirect('/dashboard/EventbriteKit/settings')->send();
             }
             $this->set('formContent', $this->request->request());
 
         } else {
-            return $this->buildRedirect('/dashboard/eventbrite/settings')->send();
+            return $this->buildRedirect('/dashboard/EventbriteKit/settings')->send();
         }
     }
 }

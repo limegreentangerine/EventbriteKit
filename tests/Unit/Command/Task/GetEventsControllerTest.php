@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Command\Task;
+namespace EventbriteKit\Tests\Unit\Command\Task;
 
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Command\Task\Controller\GetEventsController;
+use EventbriteKit\Command\Task\Controller\GetEventsController;
 
 final class GetEventsControllerTest extends TestCase
 {
@@ -13,8 +13,8 @@ final class GetEventsControllerTest extends TestCase
     public function testNameAndDescription(): void
     {
         $c = new GetEventsController();
-        $this->assertSame('Get Eventbrite events', $c->getName());
-        $this->assertStringContainsString('Eventbrite', $c->getDescription());
+        $this->assertSame('Get EventbriteKit events', $c->getName());
+        $this->assertStringContainsString('EventbriteKit', $c->getDescription());
     }
 
     /** The controller source contains no copy-pasted text naming another product. */

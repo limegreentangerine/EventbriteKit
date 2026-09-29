@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Support;
+namespace EventbriteKit\Tests\Support;
 
-use Eventbrite\Entity\Event;
+use EventbriteKit\Entity\Event;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;

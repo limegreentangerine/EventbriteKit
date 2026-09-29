@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Support;
+namespace EventbriteKit\Tests\Support;
 
-/** Records log calls; doubles as the EventbriteLogger wrapper (getLogger()). */
+/** Records log calls; doubles as the EventbriteKitLogger wrapper (getLogger()). */
 final class RecordingLogger
 {
     /** @var list<array{string, string}> */
     public array $records = [];
 
-    /** Return this logger, matching EventbriteLogger::getLogger(). */
+    /** Return this logger, matching EventbriteKitLogger::getLogger(). */
     public function getLogger(): self
     {
         return $this;

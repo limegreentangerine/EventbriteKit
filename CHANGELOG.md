@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Eventbrite are documented in this file.
+All notable changes to EventbriteKit are documented in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 the project uses [Semantic Versioning](https://semver.org/).
@@ -30,15 +30,15 @@ the project uses [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Eventbrite API client for retrieving events.
-- Event entity for storing imported Eventbrite events.
+- EventbriteKit API client for retrieving events.
+- Event entity for storing imported EventbriteKit events.
 - Event search support, including item list, result, and column set classes and
   a search controller.
-- Scheduled task to import events from Eventbrite, with command, handler, and
+- Scheduled task to import events from EventbriteKit, with command, handler, and
   task controller classes.
-- Dashboard pages for Eventbrite, including settings and event management.
+- Dashboard pages for EventbriteKit, including settings and event management.
 - Event list block.
-- Eventbrite logger.
+- EventbriteKit logger.
 
 ### Tests
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Entity;
+namespace EventbriteKit\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ClassKit\Entity\Core\UpdatedGuidEntity;
@@ -8,7 +8,7 @@ use ClassKit\Entity\Core\UpdatedGuidEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(
- *      name="eventbrite_events",
+ *      name="EventbriteKit_events",
  * 		indexes={
  *          @ORM\Index(name="idx_start_date", columns={"startDate"}),
  *          @ORM\Index(name="idx_end_date", columns={"endDate"}),
@@ -20,7 +20,7 @@ class Event extends UpdatedGuidEntity
     /**
      * @ORM\Column(type="string", length=64, nullable=false, unique=true)
      */
-    protected string $eventbriteId;
+    protected string $EventbriteKitId;
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
@@ -51,21 +51,21 @@ class Event extends UpdatedGuidEntity
     protected ?string $image;
 
     /**
-     * Find the event by `eventbriteId` (or create a new one) and overwrite every field from `$data`.
+     * Find the event by `EventbriteKitId` (or create a new one) and overwrite every field from `$data`.
      *
      * The event is not persisted; the caller must persist and flush it.
      *
-     * @param array{eventbriteId: string, name: string, url: string, venue: ?string, startDate: \DateTimeImmutable, endDate: \DateTimeImmutable, description: ?string, image: ?string} $data
+     * @param array{EventbriteKitId: string, name: string, url: string, venue: ?string, startDate: \DateTimeImmutable, endDate: \DateTimeImmutable, description: ?string, image: ?string} $data
      *
      * @return self
      */
     public static function createOrUpdate(array $data = [])
     {
-        $event = self::getByColumnAndValue('eventbriteId', $data['eventbriteId']);
+        $event = self::getByColumnAndValue('EventbriteKitId', $data['EventbriteKitId']);
         if (!$event instanceof self) {
             $event = new self();
         }
-        $event->setEventbriteId($data['eventbriteId']);
+        $event->setEventbriteKitId($data['EventbriteKitId']);
         $event->setName($data['name']);
         $event->setUrl($data['url']);
         $event->setVenue($data['venue']);
@@ -265,25 +265,25 @@ class Event extends UpdatedGuidEntity
     }
 
     /**
-     * Get the value of eventbriteId
+     * Get the value of EventbriteKitId
      *
      * @return mixed
      */
-    public function getEventbriteId()
+    public function getEventbriteKitId()
     {
-        return $this->eventbriteId;
+        return $this->EventbriteKitId;
     }
 
     /**
-     * Set the value of eventbriteId
+     * Set the value of EventbriteKitId
      *
-     * @param mixed $eventbriteId
+     * @param mixed $EventbriteKitId
      *
      * @return self
      */
-    public function setEventbriteId($eventbriteId)
+    public function setEventbriteKitId($EventbriteKitId)
     {
-        $this->eventbriteId = $eventbriteId;
+        $this->EventbriteKitId = $EventbriteKitId;
 
         return $this;
     }

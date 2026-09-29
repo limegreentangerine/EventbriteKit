@@ -1,16 +1,16 @@
 <?php
 
-namespace Eventbrite\Log;
+namespace EventbriteKit\Log;
 
 use ClassKit\Log\Logger;
 
-class EventbriteLogger extends Logger
+class EventbriteKitLogger extends Logger
 {
     /**
-     * Create a logger on the `eventbrite` channel.
+     * Create a logger on the `EventbriteKit` channel.
      */
     public function __construct()
     {
-        parent::__construct('eventbrite');
+        parent::__construct('EventbriteKit');
     }
 }

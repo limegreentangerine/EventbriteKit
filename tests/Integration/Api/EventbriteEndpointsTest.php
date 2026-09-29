@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Integration\Api;
+namespace EventbriteKit\Tests\Integration\Api;
 
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Tests\Support\Fixtures;
-use Eventbrite\Tests\Support\ApiFactory;
+use EventbriteKit\Tests\Support\Fixtures;
+use EventbriteKit\Tests\Support\ApiFactory;
 
 /** Chains the endpoints the way the import does: me -> organisations -> events. */
-final class EventbriteEndpointsTest extends TestCase
+final class EventbriteKitEndpointsTest extends TestCase
 {
     /** Calling me, organisations, then events hits each endpoint in order and uses up the mock queue. */
     public function testFullEndpointSequence(): void

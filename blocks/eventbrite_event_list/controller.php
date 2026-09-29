@@ -1,6 +1,6 @@
 <?php
 
-namespace Concrete\Package\Eventbrite\Block\EventbriteEventList;
+namespace Concrete\Package\EventbriteKit\Block\EventbriteKitEventList;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
@@ -11,19 +11,19 @@ class Controller extends BlockController
 {
     use TranslationAdaptorTrait;
 
-    protected $btTable = 'btEventbriteEventList';
-    protected $btDefaultSet = 'eventbrite';
+    protected $btTable = 'btEventbriteKitEventList';
+    protected $btDefaultSet = 'EventbriteKit';
     protected $btInterfaceWidth = 800;
     protected $btInterfaceHeight = 600;
 
     /**
      * Get events that haven't ended yet, soonest-ending first.
      *
-     * @return \Eventbrite\Entity\Event[]
+     * @return \EventbriteKit\Entity\Event[]
      */
     protected function getEvents()
     {
-        $search = new \Eventbrite\Search\ItemList\Event();
+        $search = new \EventbriteKit\Search\ItemList\Event();
         $search->filterByActive();
         $search->sortByField('endDate', 'ASC');
         return $search->getResults();
@@ -36,7 +36,7 @@ class Controller extends BlockController
      */
     public function getBlockTypeName()
     {
-        return t('Eventbrite Events Listing');
+        return t('EventbriteKit Events Listing');
     }
 
     /**
@@ -46,7 +46,7 @@ class Controller extends BlockController
      */
     public function getBlockTypeDescription()
     {
-        return t('Carousel of Eventbrite Events');
+        return t('Carousel of EventbriteKit Events');
     }
 
     /**

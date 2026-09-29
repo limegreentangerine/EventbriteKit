@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Search\Result\Item;
+namespace EventbriteKit\Search\Result\Item;
 
 use URL;
 use Concrete\Core\Search\Result\Item;
@@ -17,6 +17,6 @@ class Event extends Item
      */
     public function getViewUrl()
     {
-        return URL::to('/dashboard/eventbrite/events/details', $this->entity->getID());
+        return URL::to('/dashboard/EventbriteKit/events/details', $this->entity->getID());
     }
 }

@@ -1,16 +1,16 @@
 <?php
 
-namespace Concrete\Package\Eventbrite\Controller\SinglePage\Dashboard;
+namespace Concrete\Package\EventbriteKit\Controller\SinglePage\Dashboard;
 
 use Concrete\Core\Page\Controller\DashboardPageController;
 
-class Eventbrite extends DashboardPageController
+class EventbriteKit extends DashboardPageController
 {
     /**
-     * Redirect the Eventbrite dashboard root to the settings page.
+     * Redirect the EventbriteKit dashboard root to the settings page.
      */
     public function view()
     {
-        $this->buildRedirect('/dashboard/eventbrite/settings')->send();
+        $this->buildRedirect('/dashboard/EventbriteKit/settings')->send();
     }
 }

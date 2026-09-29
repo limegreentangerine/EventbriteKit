@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventbrite\Search\Column\Set;
+namespace EventbriteKit\Search\Column\Set;
 
 use Concrete\Core\Search\Column\{Column, Set};
 

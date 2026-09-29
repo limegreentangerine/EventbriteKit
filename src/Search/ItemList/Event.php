@@ -1,9 +1,9 @@
 <?php
 
-namespace Eventbrite\Search\ItemList;
+namespace EventbriteKit\Search\ItemList;
 
 use ClassKit\Search\ItemList\ListTrait;
-use Eventbrite\Entity\Event as CustomItemList;
+use EventbriteKit\Entity\Event as CustomItemList;
 use Concrete\Core\Search\Pagination\Pagination;
 use Concrete\Core\Search\ItemList\Database\ItemList;
 use Pagerfanta\Doctrine\DBAL\QueryAdapter as DoctrineDbalAdapter;
@@ -36,12 +36,12 @@ class Event extends ItemList implements ApplicationAwareInterface
     }
 
     /**
-     * Select all columns from `eventbrite_events`, grouped by ID.
+     * Select all columns from `EventbriteKit_events`, grouped by ID.
      */
     public function createQuery()
     {
         $this->query->select(sprintf('%s.*', $this->prefix));
-        $this->query->from('eventbrite_events', $this->prefix);
+        $this->query->from('EventbriteKit_events', $this->prefix);
         $this->query->groupBy(sprintf('%s.id', $this->prefix));
     }
 
@@ -109,7 +109,7 @@ class Event extends ItemList implements ApplicationAwareInterface
      *
      * @param array<string, mixed> $row Database row; only `id` is used
      *
-     * @return \Eventbrite\Entity\Event|null
+     * @return \EventbriteKit\Entity\Event|null
      */
     public function getResult($row)
     {

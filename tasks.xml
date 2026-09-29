@@ -2,11 +2,11 @@
 <concrete5-cif version="1.0">
 
     <tasks>
-        <task handle="get_events" package="eventbrite"/>
+        <task handle="get_events" package="EventbriteKit"/>
     </tasks>
 
     <tasksets>
-        <taskset handle="eventbrite"  name="Eventbrite" package="eventbrite">
+        <taskset handle="EventbriteKit"  name="EventbriteKit" package="EventbriteKit">
             <task handle="get_events"/>
         </taskset>
     </tasksets>

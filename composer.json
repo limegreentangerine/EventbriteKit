@@ -1,17 +1,17 @@
 {
-	"name": "limegreentangerine/eventbrite",
+	"name": "limegreentangerine/eventbrite_kit",
 	"description": "Eventbrite package",
 	"type": "concrete5-package",
 	"license": "proprietary",
 	"minimum-stability": "stable",
 	"autoload": {
 		"psr-4": {
-			"Eventbrite\\": "src/"
+			"EventbriteKit\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Eventbrite\\Tests\\": "tests/"
+			"EventbriteKit\\Tests\\": "tests/"
 		}
 	},
 	"authors": [

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Eventbrite\Tests\Unit\Command;
+namespace EventbriteKit\Tests\Unit\Command;
 
-use Eventbrite\Api\Eventbrite;
+use EventbriteKit\Api\EventbriteKit;
 use PHPUnit\Framework\TestCase;
-use Eventbrite\Log\EventbriteLogger;
+use EventbriteKit\Log\EventbriteKitLogger;
 use Doctrine\ORM\EntityManagerInterface;
-use Eventbrite\Command\GetEventsCommand;
-use Eventbrite\Tests\Support\FakeConfig;
-use Eventbrite\Tests\Support\FakePackage;
-use Eventbrite\Tests\Support\RecordingLogger;
-use Eventbrite\Tests\Support\RecordingOutput;
-use Eventbrite\Command\GetEventsCommandHandler;
+use EventbriteKit\Command\GetEventsCommand;
+use EventbriteKit\Tests\Support\FakeConfig;
+use EventbriteKit\Tests\Support\FakePackage;
+use EventbriteKit\Tests\Support\RecordingLogger;
+use EventbriteKit\Tests\Support\RecordingOutput;
+use EventbriteKit\Command\GetEventsCommandHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class GetEventsCommandHandlerTest extends TestCase
@@ -24,7 +24,7 @@ final class GetEventsCommandHandlerTest extends TestCase
     /** Build a handler whose API returns $apiResponse, using the given entity manager or a mock. */
     private function handler(JsonResponse $apiResponse, ?EntityManagerInterface $em = null): GetEventsCommandHandler
     {
-        \Core::bind(Eventbrite::class, new class($apiResponse) {
+        \Core::bind(EventbriteKit::class, new class($apiResponse) {
             public function __construct(private JsonResponse $r) {}
             public function getEvents(): JsonResponse
             {
@@ -37,10 +37,10 @@ final class GetEventsCommandHandlerTest extends TestCase
         return $handler;
     }
 
-    /** The handler throws when the eventbrite package isn't installed. */
+    /** The handler throws when the EventbriteKit package isn't installed. */
     public function testThrowsWhenPackageNotInstalled(): void
     {
-        \Package::register('eventbrite', null);
+        \Package::register('EventbriteKit', null);
         $handler = $this->handler(new JsonResponse([]));
 
         $this->expectException(\RuntimeException::class);
@@ -110,10 +110,10 @@ final class GetEventsCommandHandlerTest extends TestCase
     /** Register a fake package and a recording logger and output. */
     protected function setUp(): void
     {
-        \Package::register('eventbrite', new FakePackage(new FakeConfig()));
+        \Package::register('EventbriteKit', new FakePackage(new FakeConfig()));
         $this->logger = new RecordingLogger();
         $this->output = new RecordingOutput();
-        \Core::bind(EventbriteLogger::class, $this->logger);
+        \Core::bind(EventbriteKitLogger::class, $this->logger);
     }
 
     /** Clear the Core and Package stubs. */

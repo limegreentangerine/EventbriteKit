@@ -6,14 +6,14 @@
         <div class="form-group">
             <?php
                 echo $form->label('api_key', t('API Key'));
-echo $form->text('api_key', (isset($formContent)) ? $formContent['api_key'] : (($pkg && $pkg->getFileConfig()->get('eventbrite.api_key') !== null) ? $pkg->getFileConfig()->get('eventbrite.api_key') : ''), ['placeholder' => 'API KEY']);
+echo $form->text('api_key', (isset($formContent)) ? $formContent['api_key'] : (($pkg && $pkg->getFileConfig()->get('EventbriteKit.api_key') !== null) ? $pkg->getFileConfig()->get('EventbriteKit.api_key') : ''), ['placeholder' => 'API KEY']);
 ?>
         </div>
 
         <div class="form-group">
             <?php
     echo $form->label('base_url', t('Base URL'));
-echo $form->url('base_url', (isset($formContent)) ? $formContent['base_url'] : (($pkg && $pkg->getFileConfig()->get('eventbrite.base_url') !== null) ? $pkg->getFileConfig()->get('eventbrite.base_url') : ''), ['placeholder' => 'https://www.eventbrite.com/v3']);
+echo $form->url('base_url', (isset($formContent)) ? $formContent['base_url'] : (($pkg && $pkg->getFileConfig()->get('EventbriteKit.base_url') !== null) ? $pkg->getFileConfig()->get('EventbriteKit.base_url') : ''), ['placeholder' => 'https://www.EventbriteKit.com/v3']);
 ?>
         </div>
     </fieldset>
